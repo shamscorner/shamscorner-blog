@@ -4,10 +4,14 @@
 
             <div class="col-lg-4 col-md-6">
                 <div class="footer-section">
-
-                    <a class="logo" href="#"><img src="images/logo.png" alt="Logo Image"></a>
-                    <p class="copyright">Bona @ 2017. All rights reserved.</p>
-                    <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                    <a class="logo" href="#">
+                        <img src="{{ asset('img/blog.png') }}" alt="Logo Image" style="width: 48px;">
+                    </a>
+                    <p class="copyright">ShamsCorner @ 2019. All rights reserved.</p>
+                    <p class="copyright">
+                        Designed by 
+                        <a href="https://facebook.com/shamscorner" target="_blank">Shamim Hossain</a>
+                    </p>
                     <ul class="icons">
                         <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>

@@ -29,19 +29,21 @@
 </head>
 <body>
 
-    @include('layouts.frontend.partial.header')
-        
-    @yield('content')
-        
-    @include('layouts.frontend.partial.footer')
-
+    <div id="app">
+        @include('layouts.frontend.partial.header')
+    
+        @yield('content')
+            
+        @include('layouts.frontend.partial.footer')
+    </div>
+    
     <!-- SCIPTS -->
 
-	<script src="{{ asset('frontend/js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery-3.1.1.min.js') }}"></script>
 
-	<script src="{{ asset('frontend/js/tether.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/tether.min.js') }}"></script>
 
-	<script src="{{ asset('frontend/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap.js') }}"></script>
 
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>
     
