@@ -37,16 +37,17 @@ Route::group([
 // this is the newer style in laravel 6
 Route::name('admin.')
     ->prefix('admin')
-        ->namespace('Admin')
-            ->middleware(['auth', 'admin'])
-                ->group(function () {
-                    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-                });
+    ->namespace('Admin')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::resource('tag', 'TagController');
+    });
 
 Route::name('author.')
     ->prefix('author')
-        ->namespace('Author')
-            ->middleware(['auth', 'author'])
-                ->group(function () {
-                    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-                });
+    ->namespace('Author')
+    ->middleware(['auth', 'author'])
+    ->group(function () {
+        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    });

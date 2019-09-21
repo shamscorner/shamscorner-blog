@@ -16,21 +16,30 @@
     <div class="menu">
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
 
-                @if(Request::is('admin*'))
+            @if(Request::is('admin*')) 
+            <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}">
                 <a href="{{ route('admin.dashboard') }}">
                     <i class="material-icons">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-                @elseif(Request::is('author*'))
+            </li>
+            <li class="{{ Request::is('admin/tag*') ? 'active' : '' }}">
+                <a href="{{ route('admin.tag.index') }}">
+                    <i class="material-icons">label</i>
+                    <span>Tag</span>
+                </a>
+            </li>
+            @elseif(Request::is('author*')) 
+            <li class="{{ Request::is('author/dashboard') ? 'active' : '' }}">
                 <a href="{{ route('author.dashboard') }}">
                     <i class="material-icons">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-                @endif
-                
             </li>
+            @endif
+
+
             <li class="header">System</li>
             <li>
                 <a 
