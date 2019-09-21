@@ -39,6 +39,7 @@ rel="stylesheet">
                                     <th>Slug</th>
                                     <th>Created_at</th>
                                     <th>Updated_at</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -48,6 +49,7 @@ rel="stylesheet">
                                     <th>Slug</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -58,6 +60,29 @@ rel="stylesheet">
                                         <td>{{ $tag->slug }}</td>
                                         <td>{{ $tag->created_at }}</td>
                                         <td>{{ $tag->updated_at }}</td>
+                                        <td>
+                                            <a 
+                                            href="{{ route('admin.tag.edit', $tag->id) }}"
+                                            class="btn btn-xs btn-info waves-effect"
+                                            >
+                                                <i class="material-icons">edit</i>
+                                                <span>Edit</span>
+                                            </a>
+                                            <button 
+                                            href="{{ route('admin.tag.destroy', $tag->id) }}"
+                                            class="btn btn-xs btn-danger waves-effect"
+                                            type="button"
+                                            onclick="deleteTag({{ $tag->id }})"
+                                            >
+                                                <i class="material-icons">delete</i>
+                                                <span>Delete</span>
+                                            </button>
+                                            <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy', $tag->id) }}" 
+                                            method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -83,4 +108,24 @@ rel="stylesheet">
 <script src="{{ asset('backend/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/js/pages/tables/jquery-datatable.js') }}"></script>
+
+<script>
+function deleteTag(id) {
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+
+            event.preventDefault();
+            document.getElementById('delete-form-' + id).submit();
+        }
+    })
+}
+</script>
 @endpush
