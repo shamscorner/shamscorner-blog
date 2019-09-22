@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// in the previous version
 /* Route::group([
     'as'=>'admin.',
     'prefix'=>'admin',

@@ -48,4 +48,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role');
     }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 23/September/2019 - 01:23:37
+    *
+    * a user has many posts
+    *
+    */
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
