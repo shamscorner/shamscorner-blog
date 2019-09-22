@@ -42,6 +42,7 @@ Route::name('admin.')
     ->group(function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::resource('tag', 'TagController');
+        Route::resource('category', 'CategoryController');
     });
 
 Route::name('author.')

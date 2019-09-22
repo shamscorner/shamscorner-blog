@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Tag')
+@section('title', 'Category')
 
 @push('css')
 
@@ -14,22 +14,26 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Edit Tag
+                        Edit Category
                     </h2>
                 </div>
                 <div class="body">
-                    <form action="{{ route('admin.tag.update', $tag->id) }}" method="POST">
+                    <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" id="tag_name" class="form-control" name="tag"
-                                    value="{{ $tag->name }}">
-                                <label class="form-label">Tag Name</label>
+                                <input type="text" id="category_name" class="form-control" name="name"
+                                    value="{{ $category->name }}">
+                                <label class="form-label">Category Name</label>
                             </div>
                         </div>
+                        <div class="form-group form-float">
+                            <label class="form-label" for="category_image">Thumbnail Image</label>
+                            <input type="file" id="category_image" class="form-control" name="image">
+                        </div>
                         <a class="btn btn-danger m-t-15 waves-effect" 
-                        href="{{ route('admin.tag.index') }}"
+                        href="{{ route('admin.category.index') }}"
                         >BACK</a>
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                     </form>
