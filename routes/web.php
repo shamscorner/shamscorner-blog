@@ -35,4 +35,5 @@ Route::name('author.')
     ->middleware(['auth', 'author'])
     ->group(function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::resource('post', 'PostController');
     });

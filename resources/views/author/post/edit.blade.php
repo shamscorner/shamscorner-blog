@@ -10,8 +10,9 @@
 @section('content')
 <div class="container-fluid">
     <!-- Vertical Layout | With Floating Label -->
-    <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('author.post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="row clearfix">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="card">
@@ -23,7 +24,9 @@
                     <div class="body">
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <input type="text" id="post_title" class="form-control" name="title" required>
+                                <input type="text" id="post_title" class="form-control" 
+                                value="{{ $post->title }}"
+                                name="title" required>
                                 <label class="form-label">Title</label>
                             </div>
                         </div>
@@ -34,7 +37,8 @@
                         </div>
 
                         <div class="form-group form-float">
-                            <input type="checkbox" id="published" class="filled-in" name="status" value="1">
+                            <input type="checkbox" id="published" class="filled-in" name="status" 
+                                value="1" {{ $post->status ? ' checked' : ''}}>
                             <label class="form-label" for="published">Published</label>
                         </div>
                     </div>
@@ -59,7 +63,14 @@
                                 multiple
                             >
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option 
+                                        value="{{ $category->id }}"
+                                        @foreach ($post->categories as $postCategory)
+                                            {{ $postCategory->id == $category->id ? ' selected' : ''}}
+                                        @endforeach
+                                    >
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('categories')
@@ -78,9 +89,16 @@
                                 required
                                 multiple
                             >
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                                @endforeach
+                            @foreach ($tags as $tag)
+                                <option 
+                                    value="{{ $tag->id }}"
+                                    @foreach ($post->tags as $postTag)
+                                        {{ $postTag->id == $tag->id ? ' selected' : ''}}
+                                    @endforeach
+                                >
+                                    {{ $tag->name }}
+                                </option>
+                            @endforeach
                             </select>
                             @error('tags')
                                 <span class="invalid-feedback" role="alert">
@@ -102,11 +120,13 @@
                         </h2>
                     </div>
                     <div class="body">
-                        <textarea id="tinymce" name="body"></textarea>
+                        <textarea id="tinymce" name="body">
+                            {{ $post->body }}
+                        </textarea>
                         <a class="btn btn-danger m-t-15 waves-effect" 
-                        href="{{ route('admin.post.index') }}"
+                        href="{{ route('author.post.index') }}"
                         >BACK</a>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Submit</button>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                     </div>
                 </div>
             </div>

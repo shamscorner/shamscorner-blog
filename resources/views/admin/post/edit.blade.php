@@ -124,7 +124,7 @@
                             {{ $post->body }}
                         </textarea>
                         <a class="btn btn-danger m-t-15 waves-effect" 
-                        href="{{ route('admin.category.index') }}"
+                        href="{{ route('admin.post.index') }}"
                         >BACK</a>
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                     </div>

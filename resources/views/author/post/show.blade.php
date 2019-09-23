@@ -10,7 +10,7 @@
 <div class="container-fluid">
 
     <div>
-        <a href="{{ route('admin.post.index') }}" class="btn btn-primary waves-effect">BACK</a>
+        <a href="{{ route('author.post.index') }}" class="btn btn-primary waves-effect">BACK</a>
     </div>
     <br>
 
