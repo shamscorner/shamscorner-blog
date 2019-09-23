@@ -62,7 +62,7 @@ rel="stylesheet">
                                 @foreach ($posts as $key=>$post)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ Str::limit($post->title, '20') }}</td>
+                                        <td>{{ Str::limit($post->title, '15') }}</td>
                                         <td>{{ $post->user->name }}</td>
                                         <td>{{ $post->view_count }}</td>
                                         <td>

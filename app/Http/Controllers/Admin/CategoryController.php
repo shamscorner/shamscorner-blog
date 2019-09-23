@@ -6,9 +6,6 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Utils\Utils;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -53,29 +50,16 @@ class CategoryController extends Controller
         
         // get the image and upload
         $image = $request->file('image');
-        if (isset($image)) {
-            // take the current date for uniqueness
-            $currentDate = Carbon::now()->toDateString();
-            // make an image name from slug, currentdate and unique id with extension
-            $imageName = $slug . '-' . $currentDate . '-' . uniqid(). '.' . $image->getClientOriginalExtension();
-            // check whether the categories directory is available or not, if not, then create
-            Utils::createDirectory('categories');
 
-            // resize the image for optimal space in the thumbnail
-            $resizedImageCategory = Image::make($image)->fit(1600, 479)->stream();
-            // put the image into the categories directory and save
-            Storage::disk('public')->put('categories/'.$imageName, $resizedImageCategory);
-
-            // create a folder sliders inside the categories directory
-            Utils::createDirectory('categories/sliders');
-
-            // resize the image for optimal space in the thumbnail for the slider image
-            $resizedImageSlider = Image::make($image)->fit(500, 333)->stream();
-            // put the image into the categories slider directory and save
-            Storage::disk('public')->put('categories/sliders/'.$imageName, $resizedImageSlider);
-        } else {
-            $imageName = 'default.png';
-        }
+        // upload the image
+        $imageName = Utils::uploadImage($image, [
+            'slug' => $slug,
+            'path' => 'categories',
+            'defaultImageName' => 'default.png',
+            'isResizable' => true,
+            'width' => 1600,
+            'height' => 479
+        ]);
 
         $category = new Category();
         $category->name = $request->name;
@@ -135,35 +119,15 @@ class CategoryController extends Controller
         // get the image and upload
         $image = $request->file('image');
 
-        if (isset($image)) {
-            // take the current date for uniqueness
-            $currentDate = Carbon::now()->toDateString();
-            // make an image name from slug, currentdate and unique id with extension
-            $imageName = $slug . '-' . $currentDate . '-' . uniqid(). '.' . $image->getClientOriginalExtension();
-            // check whether the categories directory is available or not, if not, then create
-            Utils::createDirectory('categories');
-            
-            // delete old image in the categories directory
-            Utils::deleteImage('categories/'.$category->image);
-
-            // resize the image for optimal space in the thumbnail
-            $resizedImageCategory = Image::make($image)->fit(1600, 479)->stream();
-            // put the image into the categories directory and save
-            Storage::disk('public')->put('categories/'.$imageName, $resizedImageCategory);
-
-            // create a folder sliders inside the categories directory
-            Utils::createDirectory('categories/sliders');
-
-            // delete old image in the slider directory
-            Utils::deleteImage('categories/sliders/'.$category->image);
-
-            // resize the image for optimal space in the thumbnail for the slider image
-            $resizedImageSlider = Image::make($image)->fit(500, 333)->stream();
-            // put the image into the categories slider directory and save
-            Storage::disk('public')->put('categories/sliders/'.$imageName, $resizedImageSlider);
-        } else {
-            $imageName = $category->image;
-        }
+        // upload the image
+        $imageName = Utils::updateImage($image, [
+            'slug' => $slug,
+            'path' => 'categories',
+            'oldImage' => $category->image,
+            'isResizable' => true,
+            'width' => 1600,
+            'height' => 479
+        ]);
 
         $category->name = $request->name;
         $category->slug = $slug;

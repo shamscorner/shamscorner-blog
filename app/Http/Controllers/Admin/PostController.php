@@ -113,7 +113,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('admin.post.edit', compact('categories', 'tags', 'post'));
     }
 
     /**
@@ -125,7 +128,49 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'image' => 'mimes:jpeg,bmp,png,jpg',
+            'categories' => 'required',
+            'tags' => 'required',
+            'body' => 'required',
+        ]);
+
+        $image = $request->file('image');
+        $slug = Str::slug($request->title);
+
+        // upload the image
+        $imageName = Utils::updateImage($image, [
+            'slug' => $slug,
+            'path' => 'posts',
+            'oldImage' => $post->image,
+            'isResizable' => true,
+            'width' => 1600,
+            'height' => 1066
+        ]);
+
+        $post->user_id = Auth::id();
+        $post->title = $request->title;
+        $post->slug = $slug;
+        $post->image = $imageName;
+        $post->body = $request->body;
+
+        if (isset($request->status)) {
+            $post->status = true;
+        } else {
+            $post->status = false;
+        }
+
+        $post->is_approved = true;
+
+        $post->save();
+
+        $post->categories()->sync($request->categories);
+        $post->tags()->sync($request->tags);
+
+        Toastr::success('Post successfully updated.', 'Successful');
+
+        return redirect()->route('admin.post.index');
     }
 
     /**
