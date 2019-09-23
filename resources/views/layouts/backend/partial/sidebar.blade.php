@@ -42,6 +42,15 @@
                     <span>Posts</span>
                 </a>
             </li>
+            <li class="{{ Request::is('admin/pending/post') ? 'active' : '' }}">
+                <a href="{{ route('admin.post.pending') }}">
+                    <i class="material-icons">timer</i>
+                    <span>
+                        Pending
+                    </span>
+                </a>
+            </li>
+
             @elseif(Request::is('author*')) 
             <li class="{{ Request::is('author/dashboard') ? 'active' : '' }}">
                 <a href="{{ route('author.dashboard') }}">

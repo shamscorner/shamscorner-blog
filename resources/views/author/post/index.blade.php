@@ -84,13 +84,13 @@ rel="stylesheet">
                                         <td>
                                             <a 
                                             href="{{ route('author.post.show', $post->id) }}"
-                                            class="btn btn-xs btn-success waves-effect"
+                                            class="btn btn-xs btn-info waves-effect"
                                             >
                                                 <i class="material-icons">remove_red_eye</i>
                                             </a>
                                             <a 
                                             href="{{ route('author.post.edit', $post->id) }}"
-                                            class="btn btn-xs btn-info waves-effect"
+                                            class="btn btn-xs btn-warning waves-effect"
                                             >
                                                 <i class="material-icons">edit</i>
                                             </a>
@@ -134,23 +134,5 @@ rel="stylesheet">
 <script src="{{ asset('backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/js/pages/tables/jquery-datatable.js') }}"></script>
 
-<script>
-function deletePost(id) {
-    Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
-
-            event.preventDefault();
-            document.getElementById('delete-form-' + id).submit();
-        }
-    })
-}
-</script>
+<script src="{{ asset('backend/js/script.js') }}"></script>
 @endpush

@@ -42,6 +42,14 @@
                                     <i class="material-icons">done</i>
                                     <span>Approve</span>
                                 </button>
+                                <form 
+                                    id="approval-form-{{ $post->id }}" 
+                                    action="{{ route('admin.post.approve', $post->id) }}" 
+                                    method="POST" style="display: none;"
+                                >
+                                    @csrf
+                                    @method('PUT')
+                                </form>
                             @endif
                             
                         </div>
@@ -94,23 +102,5 @@
 @endsection
 
 @push('js')
-<script>
-function approvePost(id) {
-    Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
-
-            event.preventDefault();
-            document.getElementById('delete-form-' + id).submit();
-        }
-    })
-}
-</script>
+<script src="{{ asset('backend/js/script.js') }}"></script>
 @endpush

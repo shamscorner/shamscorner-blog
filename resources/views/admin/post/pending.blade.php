@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Post')
+@section('title', 'Pending Post')
 
 @push('css')
 <!-- JQuery DataTable Css -->
@@ -106,6 +106,19 @@ rel="stylesheet">
                                             method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
+                                            </form>
+
+                                            <button type="button" class="btn btn-xs btn-success waves-effect"
+                                                onclick="approvePost({{ $post->id }})">
+                                                <i class="material-icons">done</i>
+                                            </button>
+                                            <form 
+                                                id="approval-form-{{ $post->id }}" 
+                                                action="{{ route('admin.post.approve', $post->id) }}" 
+                                                method="POST" style="display: none;"
+                                            >
+                                                @csrf
+                                                @method('PUT')
                                             </form>
                                         </td>
                                     </tr>

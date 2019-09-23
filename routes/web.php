@@ -27,6 +27,9 @@ Route::name('admin.')
         Route::resource('tag', 'TagController');
         Route::resource('category', 'CategoryController');
         Route::resource('post', 'PostController');
+
+        Route::get('pending/post', 'PostController@pending')->name('post.pending');
+        Route::put('post/{id}/approve', 'PostController@approve')->name('post.approve');
     });
 
 Route::name('author.')

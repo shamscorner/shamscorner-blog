@@ -174,6 +174,42 @@ class PostController extends Controller
     }
 
     /**
+    * Author: shamscorner
+    * DateTime: 24/September/2019 - 02:21:02
+    *
+    * get all the pending post
+    *
+    */
+    public function pending()
+    {
+        $posts = Post::where('is_approved', false)->get();
+
+        return view('admin.post.pending', compact('posts'));
+    }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 24/September/2019 - 03:00:18
+    *
+    * approve the post
+    *
+    */
+    public function approve($id)
+    {
+        $post = Post::find($id);
+
+        if (!$post->is_approved) {
+            $post->is_approved = true;
+            $post->save();
+
+            Toastr::success('Post successfully approved.', 'Successful');
+        } else {
+            Toastr::success('This post is already approved.', 'Info');
+        }
+        return redirect()->back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Post  $post
