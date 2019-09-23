@@ -37,7 +37,8 @@
                                     <span>Approved</span>
                                 </button>
                             @else
-                                <button type="button" class="btn btn-success waves-effect pull-right">
+                                <button type="button" class="btn btn-success waves-effect pull-right"
+                                    onclick="approvePost({{ $post->id }})>
                                     <i class="material-icons">done</i>
                                     <span>Approve</span>
                                 </button>
@@ -93,32 +94,23 @@
 @endsection
 
 @push('js')
-<!-- Select Plugin Js -->
-<script src="{{ asset('backend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
-<!-- Multi Select Plugin Js -->
-<script src="{{ asset('backend/plugins/multi-select/js/jquery.multi-select.js') }}"></script>
-<!-- TinyMCE -->
-<script src="{{ asset('backend/plugins/tinymce/tinymce.js') }}"></script>
-
 <script>
-jQuery(document).ready(function($) {
-    // TinyMCE
-    tinymce.init({
-        selector: "textarea#tinymce",
-        theme: "modern",
-        height: 300,
-        plugins: [
-            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            'searchreplace wordcount visualblocks visualchars code fullscreen',
-            'insertdatetime media nonbreaking save table contextmenu directionality',
-            'emoticons template paste textcolor colorpicker textpattern imagetools'
-        ],
-        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-        toolbar2: 'print preview media | forecolor backcolor emoticons',
-        image_advtab: true
-    });
-    tinymce.suffix = ".min";
-    tinyMCE.baseURL = "{{ asset('backend/plugins/tinymce') }}";
-});
+function approvePost(id) {
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+
+            event.preventDefault();
+            document.getElementById('delete-form-' + id).submit();
+        }
+    })
+}
 </script>
 @endpush

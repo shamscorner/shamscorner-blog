@@ -181,6 +181,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // delete the old image
+        Utils::deleteImage('posts/'.$post->image);
+
+        // detach all the pivot table relationship
+        $post->categories()->detach();
+        $post->tags()->detach();
+
+        $post->delete();
+
+        Toastr::success('Post successfully deleted.', 'Successful');
+
+        return redirect()->back();
     }
 }
