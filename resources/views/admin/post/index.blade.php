@@ -83,6 +83,12 @@ rel="stylesheet">
                                         <td>{{ $post->updated_at }}</td>
                                         <td>
                                             <a 
+                                            href="{{ route('admin.post.show', $post->id) }}"
+                                            class="btn btn-xs btn-success waves-effect"
+                                            >
+                                                <i class="material-icons">remove_red_eye</i>
+                                            </a>
+                                            <a 
                                             href="{{ route('admin.post.edit', $post->id) }}"
                                             class="btn btn-xs btn-info waves-effect"
                                             >
