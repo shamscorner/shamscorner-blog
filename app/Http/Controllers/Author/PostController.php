@@ -103,7 +103,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('author.post.show', compact('post'));
+        if ($post->user_id == Auth::id()) {
+            return view('author.post.show', compact('post'));
+        }
     }
 
     /**
@@ -114,10 +116,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        if ($post->user_id == Auth::id()) {
+            $categories = Category::all();
+            $tags = Tag::all();
 
-        return view('author.post.edit', compact('categories', 'tags', 'post'));
+            return view('author.post.edit', compact('categories', 'tags', 'post'));
+        }
     }
 
     /**
@@ -129,7 +133,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $this->validate($request, [
+        if ($post->user_id == Auth::id()) {
+            $this->validate($request, [
             'title' => 'required',
             'image' => 'mimes:jpeg,bmp,png,jpg',
             'categories' => 'required',
@@ -137,11 +142,11 @@ class PostController extends Controller
             'body' => 'required',
         ]);
 
-        $image = $request->file('image');
-        $slug = Str::slug($request->title);
+            $image = $request->file('image');
+            $slug = Str::slug($request->title);
 
-        // upload the image
-        $imageName = Utils::updateImage($image, [
+            // upload the image
+            $imageName = Utils::updateImage($image, [
             'slug' => $slug,
             'path' => 'posts',
             'oldImage' => $post->image,
@@ -150,28 +155,29 @@ class PostController extends Controller
             'height' => 1066
         ]);
 
-        $post->user_id = Auth::id();
-        $post->title = $request->title;
-        $post->slug = $slug;
-        $post->image = $imageName;
-        $post->body = $request->body;
+            $post->user_id = Auth::id();
+            $post->title = $request->title;
+            $post->slug = $slug;
+            $post->image = $imageName;
+            $post->body = $request->body;
 
-        if (isset($request->status)) {
-            $post->status = true;
-        } else {
-            $post->status = false;
+            if (isset($request->status)) {
+                $post->status = true;
+            } else {
+                $post->status = false;
+            }
+
+            $post->is_approved = false;
+
+            $post->save();
+
+            $post->categories()->sync($request->categories);
+            $post->tags()->sync($request->tags);
+
+            Toastr::success('Post successfully updated.', 'Successful');
+
+            return redirect()->route('author.post.index');
         }
-
-        $post->is_approved = false;
-
-        $post->save();
-
-        $post->categories()->sync($request->categories);
-        $post->tags()->sync($request->tags);
-
-        Toastr::success('Post successfully updated.', 'Successful');
-
-        return redirect()->route('author.post.index');
     }
 
     /**
@@ -182,17 +188,19 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // delete the old image
-        Utils::deleteImage('posts/'.$post->image);
+        if ($post->user_id == Auth::id()) {
+            // delete the old image
+            Utils::deleteImage('posts/'.$post->image);
 
-        // detach all the pivot table relationship
-        $post->categories()->detach();
-        $post->tags()->detach();
+            // detach all the pivot table relationship
+            $post->categories()->detach();
+            $post->tags()->detach();
 
-        $post->delete();
+            $post->delete();
 
-        Toastr::success('Post successfully deleted.', 'Successful');
+            Toastr::success('Post successfully deleted.', 'Successful');
 
-        return redirect()->back();
+            return redirect()->back();
+        }
     }
 }

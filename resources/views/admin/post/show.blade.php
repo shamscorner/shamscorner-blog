@@ -32,10 +32,19 @@
                         </div>
                         <div class="col-md-2 text-right">
                             @if ($post->is_approved) 
-                                <button type="button" class="btn btn-success waves-effect pull-right disabled">
-                                    <i class="material-icons">done</i>
-                                    <span>Approved</span>
+                                <button type="button" class="btn btn-danger waves-effect pull-right"
+                                    onclick="disApprovePost({{ $post->id }})">
+                                    <i class="material-icons">clear</i>
+                                    <span>Disapprove</span>
                                 </button>
+                                <form 
+                                    id="disapproval-form-{{ $post->id }}" 
+                                    action="{{ route('admin.post.approve', $post->id) }}" 
+                                    method="POST" style="display: none;"
+                                >
+                                    @csrf
+                                    @method('PUT')
+                                </form>
                             @else
                                 <button type="button" class="btn btn-success waves-effect pull-right"
                                     onclick="approvePost({{ $post->id }})">

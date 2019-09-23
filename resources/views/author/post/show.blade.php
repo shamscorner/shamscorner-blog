@@ -31,17 +31,14 @@
                             </h2>
                         </div>
                         <div class="col-md-2 text-right">
-                            @if ($post->is_approved) 
-                                <button type="button" class="btn btn-success waves-effect pull-right disabled">
+                            @if ($post->is_approved)
+                                <div class="badge bg-green" title="Approved">
                                     <i class="material-icons">done</i>
-                                    <span>Approved</span>
-                                </button>
+                                </div>
                             @else
-                                <button type="button" class="btn btn-success waves-effect pull-right"
-                                    onclick="approvePost({{ $post->id }})">
-                                    <i class="material-icons">done</i>
-                                    <span>Approve</span>
-                                </button>
+                                <div class="badge bg-pink" title="Pending">
+                                    <i class="material-icons">clear</i>
+                                </div>
                             @endif
                             
                         </div>
@@ -94,23 +91,5 @@
 @endsection
 
 @push('js')
-<script>
-function approvePost(id) {
-    Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
 
-            event.preventDefault();
-            document.getElementById('delete-form-' + id).submit();
-        }
-    })
-}
-</script>
 @endpush

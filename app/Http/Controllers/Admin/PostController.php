@@ -198,14 +198,15 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if (!$post->is_approved) {
-            $post->is_approved = true;
-            $post->save();
-
-            Toastr::success('Post successfully approved.', 'Successful');
+        if ($post->is_approved) {
+            $post->is_approved = false;
+            $msg = 'disapproved';
         } else {
-            Toastr::success('This post is already approved.', 'Info');
+            $post->is_approved = true;
+            $msg = 'approved';
         }
+        $post->save();
+        Toastr::success('Post successfully '.$msg.'.', 'Successful');
         return redirect()->back();
     }
 
