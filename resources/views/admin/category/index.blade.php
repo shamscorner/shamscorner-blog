@@ -27,6 +27,7 @@ rel="stylesheet">
                 <div class="header">
                     <h2>
                         ALL CATEGORIES
+                        <span class="badge bg-red">{{ $categories->count() }}</span>
                     </h2>
                 </div>
                 <div class="body">
@@ -37,6 +38,7 @@ rel="stylesheet">
                                     <th>Count</th>
                                     <th>Name</th>
                                     <th>Slug</th>
+                                    <th>Posts</th>
                                     <th>Created_at</th>
                                     <th>Updated_at</th>
                                     <th>Action</th>
@@ -47,6 +49,7 @@ rel="stylesheet">
                                     <th>Count</th>
                                     <th>Name</th>
                                     <th>Slug</th>
+                                    <th>Posts</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
@@ -58,6 +61,7 @@ rel="stylesheet">
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
+                                        <td>{{ $category->posts->count() }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td>

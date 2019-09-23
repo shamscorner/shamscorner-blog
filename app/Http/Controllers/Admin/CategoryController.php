@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Utils\Utils;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -13,39 +14,6 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryController extends Controller
 {
-
-    /**
-    * Author: shamscorner
-    * DateTime: 22/September/2019 - 17:56:58
-    *
-    * delete old images from a specified directory
-    *
-    * @param $pathWithImage - the fully specified image path
-    *
-    */
-    private function deleteImage($pathWithImage)
-    {
-        if (Storage::disk('public')->exists($pathWithImage)) {
-            Storage::disk('public')->delete($pathWithImage);
-        }
-    }
-
-    /**
-    * Author: shamscorner
-    * DateTime: 22/September/2019 - 18:03:06
-    *
-    * make a directory in the specified folder
-    *
-    * @param $path - the fully specified directory path
-    *
-    */
-    private function createDirectory($path)
-    {
-        if (!Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->makeDirectory($path);
-        }
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -91,7 +59,7 @@ class CategoryController extends Controller
             // make an image name from slug, currentdate and unique id with extension
             $imageName = $slug . '-' . $currentDate . '-' . uniqid(). '.' . $image->getClientOriginalExtension();
             // check whether the categories directory is available or not, if not, then create
-            $this->createDirectory('categories');
+            Utils::createDirectory('categories');
 
             // resize the image for optimal space in the thumbnail
             $resizedImageCategory = Image::make($image)->fit(1600, 479)->stream();
@@ -99,7 +67,7 @@ class CategoryController extends Controller
             Storage::disk('public')->put('categories/'.$imageName, $resizedImageCategory);
 
             // create a folder sliders inside the categories directory
-            $this->createDirectory('categories/sliders');
+            Utils::createDirectory('categories/sliders');
 
             // resize the image for optimal space in the thumbnail for the slider image
             $resizedImageSlider = Image::make($image)->fit(500, 333)->stream();
@@ -173,10 +141,10 @@ class CategoryController extends Controller
             // make an image name from slug, currentdate and unique id with extension
             $imageName = $slug . '-' . $currentDate . '-' . uniqid(). '.' . $image->getClientOriginalExtension();
             // check whether the categories directory is available or not, if not, then create
-            $this->createDirectory('categories');
+            Utils::createDirectory('categories');
             
             // delete old image in the categories directory
-            $this->deleteImage('categories/'.$category->image);
+            Utils::deleteImage('categories/'.$category->image);
 
             // resize the image for optimal space in the thumbnail
             $resizedImageCategory = Image::make($image)->fit(1600, 479)->stream();
@@ -184,10 +152,10 @@ class CategoryController extends Controller
             Storage::disk('public')->put('categories/'.$imageName, $resizedImageCategory);
 
             // create a folder sliders inside the categories directory
-            $this->createDirectory('categories/sliders');
+            Utils::createDirectory('categories/sliders');
 
             // delete old image in the slider directory
-            $this->deleteImage('categories/sliders/'.$category->image);
+            Utils::deleteImage('categories/sliders/'.$category->image);
 
             // resize the image for optimal space in the thumbnail for the slider image
             $resizedImageSlider = Image::make($image)->fit(500, 333)->stream();
@@ -222,10 +190,10 @@ class CategoryController extends Controller
 
         // delete the old image from both categories and sliders directory
         // delete old image in the categories directory
-        $this->deleteImage('categories/'.$category->image);
+        Utils::deleteImage('categories/'.$category->image);
 
         // delete old image in the slider directory
-        $this->deleteImage('categories/sliders/'.$category->image);
+        Utils::deleteImage('categories/sliders/'.$category->image);
 
         // delete the category
         $category->delete();

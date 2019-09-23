@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Utils\UtilsService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // initiate the custom utils facade
+        $this->app->singleton('Utils', function ($app) {
+            return new UtilsService();
+        });
     }
 }
