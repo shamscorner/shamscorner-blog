@@ -76,7 +76,7 @@ rel="stylesheet">
                                             href="{{ route('admin.tag.destroy', $tag->id) }}"
                                             class="btn btn-xs btn-danger waves-effect"
                                             type="button"
-                                            onclick="deleteTag({{ $tag->id }})"
+                                            onclick="deleteDialog({{ $tag->id }})"
                                             >
                                                 <i class="material-icons">delete</i>
                                                 <span>Delete</span>
@@ -113,23 +113,5 @@ rel="stylesheet">
 <script src="{{ asset('backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 <script src="{{ asset('backend/js/pages/tables/jquery-datatable.js') }}"></script>
 
-<script>
-function deleteTag(id) {
-    Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
-
-            event.preventDefault();
-            document.getElementById('delete-form-' + id).submit();
-        }
-    })
-}
-</script>
+<script src="{{ asset('backend/js/script.js') }}"></script>
 @endpush

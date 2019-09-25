@@ -98,7 +98,7 @@ rel="stylesheet">
                                             href="{{ route('author.post.destroy', $post->id) }}"
                                             class="btn btn-xs btn-danger waves-effect"
                                             type="button"
-                                            onclick="deletePost({{ $post->id }})"
+                                            onclick="deleteDialog({{ $post->id }})"
                                             >
                                                 <i class="material-icons">delete</i>
                                             </button>
