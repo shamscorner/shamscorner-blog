@@ -14,7 +14,9 @@
 
     <!-- Font -->
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 
 	<!-- Stylesheets -->
@@ -47,6 +49,8 @@
     <script src="{{ asset('frontend/js/tether.min.js') }}"></script>
 
     <script src="{{ asset('frontend/js/bootstrap.js') }}"></script>
+
+    <script src="{{ asset('frontend/js/swiper.js') }}"></script>
 
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>
 
