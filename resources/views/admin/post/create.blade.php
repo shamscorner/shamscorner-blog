@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="form-group form-float">
-                            <input type="checkbox" id="published" class="filled-in" name="status" value="1">
+                            <input type="checkbox" id="published" class="filled-in" name="status" value="1" checked>
                             <label class="form-label" for="published">Published</label>
                         </div>
                     </div>
