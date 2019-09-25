@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Category;
+use App\Jobs\ProcessEmailForAdmins;
 use App\Notifications\NewAuthorPost;
 use App\Tag;
 use App\User;
@@ -94,8 +95,10 @@ class PostController extends Controller
         $post->tags()->attach($request->tags);
 
         // send notification
-        $users = User::where('role_id', '1')->get(); // just the admins
-        Notification::send($users, new NewAuthorPost($post));
+        /* $users = User::where('role_id', '1')->get(); // just the admins
+        Notification::send($users, new NewAuthorPost($post)); */
+
+        ProcessEmailForAdmins::dispatch($post)->delay(now()->addSeconds(10));
 
         Toastr::success('Post successfully created.', 'Successful');
 

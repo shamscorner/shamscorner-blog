@@ -7,22 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AuthorPostApprove extends Notification implements ShouldQueue
+class NewPostNotify extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private $post;
-    private $msg;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($post, $msg)
+    public function __construct($post)
     {
         $this->post = $post;
-        $this->msg = $msg;
     }
 
     /**
@@ -44,19 +42,14 @@ class AuthorPostApprove extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        if ($this->msg == 'approved') {
-            $body = 'We are happy to announce you that your post has been approved. Now you can publish your post if you haven\'t done already.';
-        } else {
-            $body = 'We are sorry to announce you that your post has been cancelled for violating our terms & conditions. Please recheck everything and post again.';
-        }
-
         return (new MailMessage)
-                ->greeting('Hello, '. $this->post->user->name .'!')
-                ->subject('Your post has been '. $this->msg .' - ShamsCorner')
-                ->line('Title: '. $this->post->title.'.')
-                ->line($body)
-                ->action('View', url(route('author.post.show', $this->post->id)))
-                ->line('Thank you for using our application!');
+            ->subject('New post available - ShamsCorner')
+            ->greeting('Hello!')
+            ->line('Here is a new post for you. We hope that you will like it.')
+            ->line('Title: '. $this->post->title)
+            //->action('View', url(route('post.details', $this->post->slug)))
+            //->action('View', url(route('/')))
+            ->line('Thank you for using our application!');
     }
 
     /**

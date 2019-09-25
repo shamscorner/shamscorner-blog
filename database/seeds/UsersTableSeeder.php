@@ -14,17 +14,17 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'role_id' => '1',
-            'name' => 'MD Admin',
-            'username' => 'admin',
-            'email' => 'admin@blog.com',
+            'name' => 'New Admin',
+            'username' => 'admin2',
+            'email' => 'admin2@blog.com',
             'password' => bcrypt('rootadmin')
         ]);
 
         DB::table('users')->insert([
             'role_id' => '2',
-            'name' => 'MD Author',
-            'username' => 'author',
-            'email' => 'author@blog.com',
+            'name' => 'New Author',
+            'username' => 'author2',
+            'email' => 'author2@blog.com',
             'password' => bcrypt('rootauthor')
         ]);
     }

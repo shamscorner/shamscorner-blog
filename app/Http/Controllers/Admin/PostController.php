@@ -6,6 +6,7 @@ use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessEmail;
 use App\Notifications\AuthorPostApprove;
 use App\Tag;
 use App\Utils\Utils;
@@ -15,6 +16,20 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    /**
+    * Author: shamscorner
+    * DateTime: 25/September/2019 - 17:48:09
+    *
+    * send notification for every subscribers
+    *
+    *@param $post - post object
+    */
+    private function sendNotificationToSubscribers($post)
+    {
+        ProcessEmail::dispatch($post)->delay(now()->addSeconds(10));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -89,6 +104,9 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        // send notification to all subscribers
+        $this->sendNotificationToSubscribers($post);
 
         Toastr::success('Post successfully created.', 'Successful');
 
@@ -210,6 +228,11 @@ class PostController extends Controller
 
         // send notification to author
         $post->user->notify(new AuthorPostApprove($post, $msg));
+
+        // send notification to all subscribers if the author publish the post
+        if ($post->status) {
+            $this->sendNotificationToSubscribers($post);
+        }
 
         Toastr::success('Post successfully '.$msg.'.', 'Successful');
         return redirect()->back();
