@@ -92,7 +92,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         return view('admin.category.edit', compact('category'));
     }
@@ -114,7 +114,7 @@ class CategoryController extends Controller
         $slug = Str::slug($request->name);
 
         // get the current category
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         
         // get the image and upload
         $image = $request->file('image');
@@ -150,7 +150,7 @@ class CategoryController extends Controller
     {
 
         // find the current category
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         // delete the old image from both categories and sliders directory
         // delete old image in the categories directory

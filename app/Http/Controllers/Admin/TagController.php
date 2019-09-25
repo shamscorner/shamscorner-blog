@@ -73,7 +73,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
 
         return view('admin.tag.edit', compact('tag'));
     }
@@ -87,7 +87,7 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
 
         $tag->name = $request->tag;
         $tag->slug = Str::slug($request->tag);
@@ -106,7 +106,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        Tag::find($id)->delete();
+        Tag::findOrFail($id)->delete();
 
         Toastr::success('Tag successfully deleted.', 'Successful');
 
