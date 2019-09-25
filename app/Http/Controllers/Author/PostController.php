@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Category;
+use App\Notifications\NewAuthorPost;
 use App\Tag;
+use App\User;
 use App\Utils\Utils;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -89,6 +92,10 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        // send notification
+        $users = User::where('role_id', '1')->get(); // just the admins
+        Notification::send($users, new NewAuthorPost($post));
 
         Toastr::success('Post successfully created.', 'Successful');
 
