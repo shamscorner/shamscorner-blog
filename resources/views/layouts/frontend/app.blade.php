@@ -52,6 +52,17 @@
 
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <script>
+            toastr.error('{{ $error }}', 'Error', {
+                closeButton: true, 
+                progressBar: true, 
+            });
+        </script>
+        @endforeach
+    @endif
     
     @stack('js')
 
