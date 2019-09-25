@@ -6,6 +6,7 @@ use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\AuthorPostApprove;
 use App\Tag;
 use App\Utils\Utils;
 use Illuminate\Support\Str;
@@ -206,6 +207,10 @@ class PostController extends Controller
             $msg = 'approved';
         }
         $post->save();
+
+        // send notification to author
+        $post->user->notify(new AuthorPostApprove($post, $msg));
+
         Toastr::success('Post successfully '.$msg.'.', 'Successful');
         return redirect()->back();
     }
