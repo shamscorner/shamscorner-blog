@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Utils\Utils;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
@@ -60,6 +62,12 @@ class CategoryController extends Controller
             'width' => 1600,
             'height' => 479
         ]);
+
+        // upload in the categories/slider directory
+        Utils::createDirectory('categories/sliders');
+        // resize image for category slider and upload
+        $sliderImage = Image::make($image)->fit(500, 333)->stream();
+        Storage::disk('public')->put('categories/sliders/'.$imageName, $sliderImage);
 
         $category = new Category();
         $category->name = $request->name;
