@@ -70,9 +70,30 @@
                                 </h4>
     
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>
+                                        @guest
+                                        <a href="javascript:void(0);" onclick="showToast()">
+                                            <i class="ion-heart"></i>
+                                            {{ $posts[$i]->favorite_to_users->count() }}
+                                        </a>
+                                        @else 
+                                        <a href="javascript:void(0);" 
+                                            onclick="submitForm('favorite-form-{{ $posts[$i]->id }}')">
+                                            <i 
+                                            class="ion-heart {{ $posts[$i]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            ></i>
+                                            {{ $posts[$i]->favorite_to_users->count() }}
+                                        </a>
+                                        <form id="favorite-form-{{ $posts[$i]->id }}" 
+                                            method="POST" 
+                                            action="{{ route('post.favorite', $posts[$i]->id) }}"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                        @endguest
+                                    </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-info -->
@@ -114,9 +135,30 @@
                                 </div>
     
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>
+                                        @guest
+                                        <a href="javascript:void(0);" onclick="showToast()">
+                                            <i class="ion-heart"></i>
+                                            {{ $posts[3]->favorite_to_users->count() }}
+                                        </a>
+                                        @else 
+                                        <a href="javascript:void(0);" 
+                                            onclick="submitForm('favorite-form-{{ $posts[3]->id }}')">
+                                            <i 
+                                            class="ion-heart {{ $posts[3]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            ></i>
+                                            {{ $posts[3]->favorite_to_users->count() }}
+                                        </a>
+                                        <form id="favorite-form-{{ $posts[3]->id }}" 
+                                            method="POST" 
+                                            action="{{ route('post.favorite', $posts[3]->id) }}"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                        @endguest
+                                    </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[3]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-right -->
@@ -147,9 +189,30 @@
                             </h4>
     
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>
+                                    @guest
+                                    <a href="javascript:void(0);" onclick="showToast()">
+                                        <i class="ion-heart"></i>
+                                        {{ $posts[4]->favorite_to_users->count() }}
+                                    </a>
+                                    @else 
+                                    <a href="javascript:void(0);" 
+                                        onclick="submitForm('favorite-form-{{ $posts[4]->id }}')">
+                                        <i 
+                                        class="ion-heart {{ $posts[4]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        ></i>
+                                        {{ $posts[4]->favorite_to_users->count() }}
+                                    </a>
+                                    <form id="favorite-form-{{ $posts[4]->id }}" 
+                                        method="POST" 
+                                        action="{{ route('post.favorite', $posts[4]->id) }}"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    @endguest
+                                </li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[4]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -185,9 +248,30 @@
                                 </div>
     
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>
+                                        @guest
+                                        <a href="javascript:void(0);" onclick="showToast()">
+                                            <i class="ion-heart"></i>
+                                            {{ $posts[5]->favorite_to_users->count() }}
+                                        </a>
+                                        @else 
+                                        <a href="javascript:void(0);" 
+                                            onclick="submitForm('favorite-form-{{ $posts[5]->id }}')">
+                                            <i 
+                                            class="ion-heart {{ $posts[5]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            ></i>
+                                            {{ $posts[5]->favorite_to_users->count() }}
+                                        </a>
+                                        <form id="favorite-form-{{ $posts[5]->id }}" 
+                                            method="POST" 
+                                            action="{{ route('post.favorite', $posts[5]->id) }}"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                        @endguest
+                                    </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[5]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-right -->
@@ -218,9 +302,30 @@
                             </h4>
     
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>
+                                    @guest
+                                    <a href="javascript:void(0);" onclick="showToast()">
+                                        <i class="ion-heart"></i>
+                                        {{ $posts[6]->favorite_to_users->count() }}
+                                    </a>
+                                    @else 
+                                    <a href="javascript:void(0);" 
+                                        onclick="submitForm('favorite-form-{{ $posts[6]->id }}')">
+                                        <i 
+                                        class="ion-heart {{ $posts[6]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        ></i>
+                                        {{ $posts[6]->favorite_to_users->count() }}
+                                    </a>
+                                    <form id="favorite-form-{{ $posts[6]->id }}" 
+                                        method="POST" 
+                                        action="{{ route('post.favorite', $posts[6]->id) }}"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    @endguest
+                                </li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[6]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -243,9 +348,30 @@
                             </div>
     
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>
+                                    @guest
+                                    <a href="javascript:void(0);" onclick="showToast()">
+                                        <i class="ion-heart"></i>
+                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                    </a>
+                                    @else 
+                                    <a href="javascript:void(0);" 
+                                        onclick="submitForm('favorite-form-{{ $posts[$i]->id }}')">
+                                        <i 
+                                        class="ion-heart {{ $posts[$i]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        ></i>
+                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                    </a>
+                                    <form id="favorite-form-{{ $posts[$i]->id }}" 
+                                        method="POST" 
+                                        action="{{ route('post.favorite', $posts[$i]->id) }}"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    @endguest
+                                </li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -269,9 +395,30 @@
                             </div>
     
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>
+                                    @guest
+                                    <a href="javascript:void(0);" onclick="showToast()">
+                                        <i class="ion-heart"></i>
+                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                    </a>
+                                    @else 
+                                    <a href="javascript:void(0);" 
+                                        onclick="submitForm('favorite-form-{{ $posts[$i]->id }}')">
+                                        <i 
+                                        class="ion-heart {{ $posts[$i]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        ></i>
+                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                    </a>
+                                    <form id="favorite-form-{{ $posts[$i]->id }}" 
+                                        method="POST" 
+                                        action="{{ route('post.favorite', $posts[$i]->id) }}"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    @endguest
+                                </li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -313,9 +460,30 @@
                                 </div>
     
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>
+                                        @guest
+                                        <a href="javascript:void(0);" onclick="showToast()">
+                                            <i class="ion-heart"></i>
+                                            {{ $posts[11]->favorite_to_users->count() }}
+                                        </a>
+                                        @else 
+                                        <a href="javascript:void(0);" 
+                                            onclick="submitForm('favorite-form-{{ $posts[11]->id }}')">
+                                            <i 
+                                            class="ion-heart {{ $posts[11]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            ></i>
+                                            {{ $posts[11]->favorite_to_users->count() }}
+                                        </a>
+                                        <form id="favorite-form-{{ $posts[11]->id }}" 
+                                            method="POST" 
+                                            action="{{ route('post.favorite', $posts[11]->id) }}"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                        @endguest
+                                    </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[11]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-right -->
@@ -350,9 +518,17 @@
                             </h4>
 
                             <ul class="post-footer">
+
+                                @guest
+                                <li><i class="ion-heart"></i>57/li>
+                                <li><i class="ion-chatbubble"></i>6</li>
+                                <li><i class="ion-eye"></i>{{ $post->view_count }}</li>
+                                @else
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
+                                @endguest
+                                
                             </ul>
 
                         </div><!-- blog-info -->

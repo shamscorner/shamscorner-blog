@@ -41,4 +41,16 @@ class Post extends Model
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 26/September/2019 - 19:01:16
+    *
+    * posts which are favorite to users
+    *
+    */
+    public function favorite_to_users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
 }
