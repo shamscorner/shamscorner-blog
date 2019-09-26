@@ -8,6 +8,7 @@ use App\User;
 use App\Utils\Utils;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class SettingsController extends Controller
@@ -64,5 +65,38 @@ class SettingsController extends Controller
         Toastr::success('Profile successfully updated.', 'Successful');
 
         return redirect()->route('admin.dashboard');
+    }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 26/September/2019 - 14:48:31
+    *
+    * update the user password
+    *
+    */
+    public function updatePassword(Request $request)
+    {
+        $this->validate($request, [
+            'old_password' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+
+        $hashedPassword = Auth::user()->password;
+
+        if (Hash::check($request->old_password, $hashedPassword)) {
+            if (!Hash::check($request->password, $hashedPassword)) {
+                $user = User::find(Auth::id());
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                Toastr::success('Password successfully updated.', 'Successful');
+
+                Auth::logout();
+            }
+        } else {
+            Toastr::error('Old password is incorrect.', 'Error');
+        }
+
+        return redirect()->back(); // reload the current page to remove saved cache
     }
 }
