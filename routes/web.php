@@ -23,6 +23,10 @@ Route::name('admin.')
     ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+        Route::get('settings', 'SettingsController@index')->name('settings');
+        Route::put('profile-update', 'SettingsController@updateProfile')->name('profile.update');
+        
         Route::resource('tag', 'TagController');
         Route::resource('category', 'CategoryController');
         Route::resource('post', 'PostController');
