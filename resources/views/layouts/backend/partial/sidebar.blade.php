@@ -58,7 +58,7 @@
                     </span>
                 </a>
             </li>
-            <li class="header">Internal</li>
+            <li class="header">System</li>
             <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
                 <a href="{{ route('admin.settings') }}">
                     <i class="material-icons">settings</i>
@@ -67,7 +67,18 @@
                     </span>
                 </a>
             </li>
-
+            <li>
+                <a 
+                    href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                >
+                    <i class="material-icons">logout</i>
+                    <span>{{ __('Logout') }}</span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
 
             @elseif(Request::is('author*')) 
             <li class="{{ Request::is('author/dashboard') ? 'active' : '' }}">
@@ -82,10 +93,15 @@
                     <span>Posts</span>
                 </a>
             </li>
-            @endif
-
-
             <li class="header">System</li>
+            <li class="{{ Request::is('author/settings') ? 'active' : '' }}">
+                <a href="{{ route('author.settings') }}">
+                    <i class="material-icons">settings</i>
+                    <span>
+                        Settings
+                    </span>
+                </a>
+            </li>
             <li>
                 <a 
                     href="{{ route('logout') }}"
@@ -98,6 +114,7 @@
                     @csrf
                 </form>
             </li>
+            @endif
         </ul>
     </div>
     <!-- #Menu -->
