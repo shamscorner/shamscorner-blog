@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title', 'Pending Post')
+@section('title', 'Favorite Post')
 
 @push('css')
 <!-- JQuery DataTable Css -->
@@ -11,22 +11,12 @@ rel="stylesheet">
 @section('content')
 <!-- Exportable Table -->
 <div class="container-fluid">
-
-    <div class="block-header text-right">
-        <a 
-        href="{{ route('admin.post.create') }}" 
-        class="btn btn-primary waves-effect"
-        >
-            <i class="material-icons">add</i>
-            <span>Add new post</span>
-        </a>
-    </div>
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
                     <h2>
-                        ALL POSTS <span class="badge bg-red">{{ $posts->count() }}</span>
+                        ALL FAVORITE POSTS <span class="badge bg-red">{{ $posts->count() }}</span>
                     </h2>
                 </div>
                 <div class="body">
@@ -38,10 +28,8 @@ rel="stylesheet">
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Views</th>
-                                    <th>Approved</th>
-                                    <th>Status</th>
-                                    <th>Created_at</th>
-                                    <th>Updated_at</th>
+                                    <th>favorites</th>
+                                    <th>Comments</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -51,10 +39,8 @@ rel="stylesheet">
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Views</th>
-                                    <th>Approved</th>
-                                    <th>Status</th>
-                                    <th>Created_at</th>
-                                    <th>Updated_at</th>
+                                    <th>favorites</th>
+                                    <th>Comments</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -65,34 +51,14 @@ rel="stylesheet">
                                         <td>{{ Str::limit($post->title, '15') }}</td>
                                         <td>{{ $post->user->name }}</td>
                                         <td>{{ $post->view_count }}</td>
-                                        <td>
-                                            @if($post->is_approved)
-                                                <span class="badge bg-green">Approved</span>
-                                            @else
-                                                <span class="badge bg-pink">Pending</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($post->status)
-                                                <span class="badge bg-blue">Published</span>
-                                            @else
-                                                <span class="badge bg-pink">Pending</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $post->created_at }}</td>
-                                        <td>{{ $post->updated_at }}</td>
+                                        <td>{{ $post->favorite_to_users->count() }}</td>
+                                        <td>0</td>
                                         <td>
                                             <a 
-                                            href="{{ route('admin.post.show', $post->id) }}"
-                                            class="btn btn-xs btn-info waves-effect"
+                                                href="#"
+                                                class="btn btn-xs btn-info waves-effect"
                                             >
                                                 <i class="material-icons">remove_red_eye</i>
-                                            </a>
-                                            <a 
-                                            href="{{ route('admin.post.edit', $post->id) }}"
-                                            class="btn btn-xs btn-warning waves-effect"
-                                            >
-                                                <i class="material-icons">edit</i>
                                             </a>
                                             <button 
                                                 class="btn btn-xs btn-danger waves-effect"
@@ -102,24 +68,9 @@ rel="stylesheet">
                                                 <i class="material-icons">delete</i>
                                             </button>
                                             <form id="delete-form-{{ $post->id }}" 
-                                                action="{{ route('admin.post.destroy', $post->id) }}" 
+                                                action="{{ route('post.favorite', $post->id) }}" 
                                                 method="POST" style="display: none;">
                                                 @csrf
-                                                @method('DELETE')
-                                            </form>
-
-                                            <button type="button" 
-                                                class="btn btn-xs btn-success waves-effect"
-                                                onclick="approvePost({{ $post->id }})">
-                                                <i class="material-icons">done</i>
-                                            </button>
-                                            <form 
-                                                id="approval-form-{{ $post->id }}" 
-                                                action="{{ route('admin.post.approve', $post->id) }}" 
-                                                method="POST" style="display: none;"
-                                            >
-                                                @csrf
-                                                @method('PUT')
                                             </form>
                                         </td>
                                     </tr>

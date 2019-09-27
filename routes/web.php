@@ -38,8 +38,11 @@ Route::name('admin.')
 
         Route::get('pending/post', 'PostController@pending')->name('post.pending');
         Route::put('post/{id}/approve', 'PostController@approve')->name('post.approve');
+
         Route::get('subscriber', 'SubscriberController@index')->name('subscriber.index');
         Route::delete('subscriber/{id}', 'SubscriberController@destroy')->name('subscriber.destroy');
+        
+        Route::get('favorite', 'FavoriteController@index')->name('favorite.index');
     });
 
 Route::name('author.')
@@ -54,4 +57,6 @@ Route::name('author.')
         Route::put('password-update', 'SettingsController@updatePassword')->name('password.update');
 
         Route::resource('post', 'PostController');
+
+        Route::get('favorite', 'FavoriteController@index')->name('favorite.index');
     });
