@@ -53,4 +53,16 @@ class Post extends Model
     {
         return $this->belongsToMany('App\User')->withTimestamps();
     }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 29/September/2019 - 00:44:16
+    *
+    * a post has many comments
+    *
+    */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

@@ -72,4 +72,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Post')->withTimestamps();
     }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 29/September/2019 - 00:45:56
+    *
+    * a user has many comments
+    *
+    */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
