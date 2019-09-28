@@ -92,8 +92,10 @@
                                         </form>
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
+                                    <li><a href="javascript:void(0);">
+                                        <i class="ion-chatbubble"></i>{{ $posts[$i]->comments->count() }}</a>
+                                    </li>
+                                    <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-info -->
@@ -157,8 +159,10 @@
                                         </form>
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[3]->view_count }}</a></li>
+                                    <li><a href="javascript:void(0);">
+                                        <i class="ion-chatbubble"></i>{{ $posts[3]->comments->count() }}</a>
+                                    </li>
+                                    <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[3]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-right -->
@@ -211,8 +215,10 @@
                                     </form>
                                     @endguest
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[4]->view_count }}</a></li>
+                                <li><a href="javascript:void(0);">
+                                    <i class="ion-chatbubble"></i>{{ $posts[4]->comments->count() }}</a>
+                                </li>
+                                <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[4]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -270,8 +276,10 @@
                                         </form>
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[5]->view_count }}</a></li>
+                                    <li><a href="javascript:void(0);">
+                                        <i class="ion-chatbubble"></i>{{ $posts[5]->comments->count() }}</a>
+                                    </li>
+                                    <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[5]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-right -->
@@ -324,8 +332,10 @@
                                     </form>
                                     @endguest
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[6]->view_count }}</a></li>
+                                <li><a href="javascript:void(0);">
+                                    <i class="ion-chatbubble"></i>{{ $posts[6]->comments->count() }}</a>
+                                </li>
+                                <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[6]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -370,8 +380,10 @@
                                     </form>
                                     @endguest
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
+                                <li><a href="javascript:void(0);">
+                                    <i class="ion-chatbubble"></i>{{ $posts[$i]->comments->count() }}</a>
+                                </li>
+                                <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -417,8 +429,10 @@
                                     </form>
                                     @endguest
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
+                                <li><a href="javascript:void(0);">
+                                    <i class="ion-chatbubble"></i>{{ $posts[$i]->comments->count() }}</a>
+                                </li>
+                                <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                             </ul>
     
                         </div><!-- single-post -->
@@ -482,8 +496,10 @@
                                         </form>
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>{{ $posts[11]->view_count }}</a></li>
+                                    <li><a href="javascript:void(0);">
+                                        <i class="ion-chatbubble"></i>{{ $posts[11]->comments->count() }}</a>
+                                    </li>
+                                    <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[11]->view_count }}</a></li>
                                 </ul>
     
                             </div><!-- blog-right -->
@@ -520,13 +536,13 @@
                             <ul class="post-footer">
 
                                 @guest
-                                <li><i class="ion-heart"></i>57/li>
-                                <li><i class="ion-chatbubble"></i>6</li>
+                                <li><i class="ion-heart"></i>{{ $post->favorite_to_users->count() }}/li>
+                                <li><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</li>
                                 <li><i class="ion-eye"></i>{{ $post->view_count }}</li>
                                 @else
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
+                                <li><a href="javascript:void(0);"><i class="ion-heart"></i>{{ $post->favorite_to_users->count() }}</a></li>
+                                <li><a href="javascript:void(0);"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
+                                <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                                 @endguest
                                 
                             </ul>
@@ -541,7 +557,7 @@
 
         </div><!-- row -->
 
-        <a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+        <a class="load-more-btn" href="{{ route('post.index') }}"><b>VIEW MORE</b></a>
 
     </div><!-- container -->
 </section><!-- section -->
