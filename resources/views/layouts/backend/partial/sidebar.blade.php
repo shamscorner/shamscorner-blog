@@ -66,6 +66,14 @@
                     </span>
                 </a>
             </li>
+            <li class="{{ Request::is('admin/comments') ? 'active' : '' }}">
+                <a href="{{ route('admin.comment.index') }}">
+                    <i class="material-icons">comment</i>
+                    <span>
+                        Comments
+                    </span>
+                </a>
+            </li>
             <li class="header">System</li>
             <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
                 <a href="{{ route('admin.settings') }}">
@@ -106,6 +114,14 @@
                     <i class="material-icons">favorite</i>
                     <span>
                         Favorite Posts
+                    </span>
+                </a>
+            </li>
+            <li class="{{ Request::is('author/comments') ? 'active' : '' }}">
+                <a href="{{ route('author.comment.index') }}">
+                    <i class="material-icons">comment</i>
+                    <span>
+                        Comments
                     </span>
                 </a>
             </li>

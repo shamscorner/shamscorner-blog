@@ -48,6 +48,9 @@ Route::name('admin.')
         Route::delete('subscriber/{id}', 'SubscriberController@destroy')->name('subscriber.destroy');
         
         Route::get('favorite', 'FavoriteController@index')->name('favorite.index');
+
+        Route::get('comments', 'CommentController@index')->name('comment.index');
+        Route::delete('comments/{id}', 'CommentController@destroy')->name('comment.destroy');
     });
 
 Route::name('author.')
@@ -64,4 +67,7 @@ Route::name('author.')
         Route::resource('post', 'PostController');
 
         Route::get('favorite', 'FavoriteController@index')->name('favorite.index');
+
+        Route::get('comments', 'CommentController@index')->name('comment.index');
+        Route::delete('comments/{id}', 'CommentController@destroy')->name('comment.destroy');
     });
