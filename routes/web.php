@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');
 
+Route::get('post/{slug}', 'PostController@details')->name('post.details');
+
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {

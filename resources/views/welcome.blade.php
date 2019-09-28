@@ -64,8 +64,8 @@
                             <div class="blog-info">
     
                                 <h4 class="title">
-                                    <a href="#">
-                                        <b>{!! $posts[$i]->body !!}</b>
+                                    <a href="{{ route('post.details', $posts[$i]->slug) }}">
+                                        <b>{{ $posts[$i]->title }}</b>
                                     </a>
                                 </h4>
     
@@ -116,7 +116,7 @@
                                 <h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>
     
                                 <h4 class="title">
-                                    <a href="#">
+                                    <a href="{{ route('post.details', $posts[3]->slug) }}">
                                         <b>{{ $posts[3]->title }}</b>
                                     </a>
                                 </h4>
@@ -183,7 +183,7 @@
                             </a>
     
                             <h4 class="title">
-                                <a href="#">
+                                <a href="{{ route('post.details', $posts[4]->slug) }}">
                                     <b>{{ $posts[4]->title }}</b>
                                 </a>
                             </h4>
@@ -229,7 +229,7 @@
                                 <h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>
     
                                 <h4 class="title">
-                                    <a href="#">
+                                    <a href="{{ route('post.details', $posts[5]->slug) }}">
                                         <b>{{ $posts[5]->title }}</b>
                                     </a>
                                 </h4>
@@ -286,8 +286,8 @@
                         <div class="single-post post-style-1">
 
                             <div class="blog-image">
-                                    <img src="{{ asset('storage/posts/'. $posts[6]->image) }}" 
-                                    alt="{{ $posts[6]->title }}">
+                                <img src="{{ asset('storage/posts/'. $posts[6]->image) }}" 
+                                alt="{{ $posts[6]->title }}">
                             </div>
     
                             <a class="avatar" href="#">
@@ -296,7 +296,7 @@
                             </a>
     
                             <h4 class="title">
-                                <a href="#">
+                                <a href="{{ route('post.details', $posts[6]->slug) }}">
                                     <b>{{ $posts[6]->title }}</b>
                                 </a>
                             </h4>
@@ -341,7 +341,7 @@
     
                             <div class="display-table">
                                 <h4 class="title display-table-cell">
-                                    <a href="#">
+                                    <a href="{{ route('post.details', $posts[$i]->slug) }}">
                                         <b>{{ $posts[$i]->title }}</b>
                                     </a>
                                 </h4>
@@ -388,7 +388,7 @@
     
                             <div class="display-table">
                                 <h4 class="title display-table-cell">
-                                    <a href="#">
+                                    <a href="{{ route('post.details', $posts[$i]->slug) }}">
                                         <b>{{ $posts[$i]->title }}</b>
                                     </a>
                                 </h4>
@@ -441,7 +441,7 @@
                                 <h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>
     
                                 <h4 class="title">
-                                    <a href="#">
+                                    <a href="{{ route('post.details', $posts[11]->slug) }}">
                                         <b>{{ $posts[11]->title }}</b>
                                     </a>
                                 </h4>
@@ -512,8 +512,8 @@
                         <div class="blog-info">
 
                             <h4 class="title">
-                                <a href="#">
-                                    <b>{!! $post->body !!}</b>
+                                <a href="{{ route('post.details', $post->slug) }}">
+                                    <b>{{ $post->title }}</b>
                                 </a>
                             </h4>
 
