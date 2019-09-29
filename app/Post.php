@@ -65,4 +65,28 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 29/September/2019 - 18:48:25
+    *
+    * check the post is pending or not
+    *
+    */
+    public function scopeApproved($query)
+    {
+        return $query->where('is_approved', 1);
+    }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 29/September/2019 - 19:33:34
+    *
+    * check the post is published or not
+    *
+    */
+    public function scopePublished($query)
+    {
+        return $query->where('status', 1);
+    }
 }

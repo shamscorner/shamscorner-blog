@@ -17,7 +17,7 @@ class HomeController extends Controller
     {
         $categories = Category::all();
 
-        $posts = Post::latest()->take(12)->get();
+        $posts = Post::latest()->approved()->published()->take(12)->get();
 
         return view('welcome', compact('categories', 'posts'));
     }

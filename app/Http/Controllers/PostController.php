@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -17,7 +19,7 @@ class PostController extends Controller
     */
     public function index()
     {
-        $posts = Post::latest()->paginate(12);
+        $posts = Post::latest()->approved()->published()->paginate(12);
 
         return view('posts', compact('posts'));
     }
@@ -31,7 +33,7 @@ class PostController extends Controller
     */
     public function details($slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->approved()->published()->first();
 
         $blogKey = 'shamscorner_' . $post->id;
 
@@ -41,8 +43,40 @@ class PostController extends Controller
             Session::put($blogKey);
         }
 
-        $randomPosts = Post::all()->random(3);
+        $randomPosts = Post::approved()->published()->take(3)->inRandomOrder()->get();
 
         return view('post', compact('post', 'randomPosts'));
+    }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 29/September/2019 - 15:04:17
+    *
+    * show all the post associated with the category
+    *
+    * @param $slug
+    *
+    */
+    public function postByCategory($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        $posts = $category->posts()->approved()->published()->paginate(12);
+
+        return view('categoryPost', compact('posts', 'category'));
+    }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 29/September/2019 - 18:34:30
+    *
+    * show all the post associated with the tag
+    *
+    */
+    public function postByTag($slug)
+    {
+        $tag = Tag::where('slug', $slug)->first();
+        $posts = $tag->posts()->approved()->published()->paginate(12);
+
+        return view('tagPost', compact('posts', 'tag'));
     }
 }
