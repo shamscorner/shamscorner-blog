@@ -1,6 +1,8 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Posts')
+@section('title')
+{{ isset($query) ? $query : 'Posts' }}
+@endsection
 
 @push('css')
 <link href="{{ asset('frontend/css/category/styles.css') }}" rel="stylesheet">

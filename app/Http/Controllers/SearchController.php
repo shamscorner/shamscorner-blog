@@ -20,6 +20,6 @@ class SearchController extends Controller
 
         $posts = Post::where('title', 'LIKE', "%$query%")->approved()->published()->paginate(12);
 
-        return view('posts', compact('posts'));
+        return view('posts', compact('posts', 'query'));
     }
 }

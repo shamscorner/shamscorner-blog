@@ -25,7 +25,8 @@
         <div class="src-area">
             <form method="GET" action="{{ route('search') }}">
                 <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                <input class="src-input" type="text" name="query" placeholder="Type of search">
+                <input class="src-input" type="text" name="query" 
+                    placeholder="Type of search" value="{{ isset($query) ? $query : '' }}">
             </form>
         </div>
 
