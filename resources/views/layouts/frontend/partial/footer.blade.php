@@ -7,7 +7,7 @@
                     <a class="logo" href="#">
                         <img src="{{ asset('img/blog.png') }}" alt="Logo Image" style="width: 48px;">
                     </a>
-                    <p class="copyright">ShamsCorner @ 2019. All rights reserved.</p>
+                    <p class="copyright">{{ config('app.name') }} @ 2019. All rights reserved.</p>
                     <p class="copyright">
                         Designed by 
                         <a href="https://facebook.com/shamscorner" target="_blank">Shamim Hossain</a>
@@ -27,14 +27,9 @@
                     <div class="footer-section">
                     <h4 class="title"><b>CATAGORIES</b></h4>
                     <ul>
-                        <li><a href="#">BEAUTY</a></li>
-                        <li><a href="#">HEALTH</a></li>
-                        <li><a href="#">MUSIC</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#">SPORT</a></li>
-                        <li><a href="#">DESIGN</a></li>
-                        <li><a href="#">TRAVEL</a></li>
+                        @foreach ($categories as $category)
+                        <li><a href="{{ route('category.posts', $category->slug) }}">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div><!-- footer-section -->
             </div><!-- col-lg-4 col-md-6 -->

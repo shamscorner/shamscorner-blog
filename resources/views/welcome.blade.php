@@ -17,7 +17,7 @@
 
             @foreach ($categories as $category)
             <div class="swiper-slide">
-                <a class="slider-category" href="#">
+                <a class="slider-category" href="{{ route('category.posts', $category->slug) }}">
                     <div class="blog-image">
                         <img src="{{ asset('storage/categories/sliders/'.$category->image) }}" 
                         alt="{{ $category->name }}">
