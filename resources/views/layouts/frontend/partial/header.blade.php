@@ -1,7 +1,7 @@
 <header>
     <div class="container-fluid position-relative no-side-padding">
 
-        <a href="#" class="logo">ShamsCorner</a>
+        <a href="{{ env('APP_URL') }}" class="logo">{{ env('APP_NAME') }}</a>
 
         <div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 
