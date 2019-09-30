@@ -56,8 +56,8 @@
                                 alt="{{ $posts[$i]->title }}">
                             </div>
     
-                            <a class="avatar" href="#">
-                                <img src="{{ asset('img/user.png') }}" 
+                            <a class="avatar" href="{{ route('author.profile', $posts[$i]->user->username) }}">
+                                <img src="{{ asset('storage/profiles/'. $posts[$i]->user->image) }}" 
                                 alt="{{ $posts[$i]->user->name }}">
                             </a>
     
@@ -126,8 +126,8 @@
                                 <p>{!! $posts[3]->body !!}</p>
     
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#">
-                                        <img src="{{ asset('img/user.png') }}" 
+                                    <a class="avatar" href="{{ route('author.profile', $posts[3]->user->username) }}">
+                                        <img src="{{ asset('storage/profiles/'. $posts[3]->user->image) }}" 
                                         alt="{{ $posts[3]->user->name }}">
                                     </a>
                                     <div class="right-area">
@@ -181,8 +181,8 @@
                                     alt="{{ $posts[4]->title }}">
                             </div>
     
-                            <a class="avatar" href="#">
-                                <img src="{{ asset('img/user.png') }}" 
+                            <a class="avatar" href="{{ route('author.profile', $posts[4]->user->username) }}">
+                                <img src="{{ asset('storage/profiles/'. $posts[4]->user->image) }}" 
                                 alt="{{ $posts[4]->user->name }}">
                             </a>
     
@@ -243,8 +243,8 @@
                                 <p>{!! $posts[5]->body !!}</p>
     
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#">
-                                        <img src="{{ asset('img/user.png') }}" 
+                                    <a class="avatar" href="{{ route('author.profile', $posts[5]->user->username) }}">
+                                        <img src="{{ asset('storage/profiles/'. $posts[5]->user->image) }}" 
                                         alt="{{ $posts[4]->user->name }}">
                                     </a>
                                     <div class="right-area">
@@ -298,8 +298,8 @@
                                 alt="{{ $posts[6]->title }}">
                             </div>
     
-                            <a class="avatar" href="#">
-                                <img src="{{ asset('img/user.png') }}" 
+                            <a class="avatar" href="{{ route('author.profile', $posts[6]->user->username) }}">
+                                <img src="{{ asset('storage/profiles/'. $posts[6]->user->image) }}" 
                                 alt="{{ $posts[6]->user->name }}">
                             </a>
     
@@ -463,8 +463,8 @@
                                 <p>{!! $posts[11]->body !!}</p>
     
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#">
-                                        <img src="{{ asset('img/user.png') }}" 
+                                    <a class="avatar" href="{{ route('author.profile', $posts[11]->user->username) }}">
+                                        <img src="{{ asset('storage/profiles/'. $posts[11]->user->image) }}" 
                                         alt="{{ $posts[11]->user->name }}">
                                     </a>
                                     <div class="right-area">
@@ -520,8 +520,8 @@
                             alt="{{ $post->title }}">
                         </div>
 
-                        <a class="avatar" href="#">
-                            <img src="{{ asset('img/user.png') }}" 
+                        <a class="avatar" href="{{ route('author.profile', $post->user->username) }}">
+                            <img src="{{ asset('storage/profiles/'. $post->user->image) }}" 
                             alt="{{ $post->user->name }}">
                         </a>
 
