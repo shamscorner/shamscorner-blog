@@ -42,6 +42,12 @@
                     <span>Posts</span>
                 </a>
             </li>
+            <li class="{{ Request::is('admin/author*') ? 'active' : '' }}">
+                <a href="{{ route('admin.author.index') }}">
+                    <i class="material-icons">account_circle</i>
+                    <span>Authors</span>
+                </a>
+            </li>
             <li class="{{ Request::is('admin/pending/post') ? 'active' : '' }}">
                 <a href="{{ route('admin.post.pending') }}">
                     <i class="material-icons">timer</i>

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username'
     ];
 
     /**
@@ -83,5 +83,17 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    /**
+    * Author: shamscorner
+    * DateTime: 01/October/2019 - 02:23:37
+    *
+    * get all user with role id - 2
+    *
+    */
+    public function scopeAuthors($query)
+    {
+        return $query->where('role_id', 2);
     }
 }
