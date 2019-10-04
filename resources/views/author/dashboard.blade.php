@@ -20,30 +20,30 @@
                     <i class="material-icons">playlist_add_check</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW TASKS</div>
-                    <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="text">TOTAL POSTS</div>
+                    <div class="number count-to" data-from="0" data-to="{{ $posts->count() }}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-cyan hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">help</i>
+                    <i class="material-icons">favorite</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW TICKETS</div>
-                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">FAVORITE POSTS</div>
+                    <div class="number count-to" data-from="0" data-to="{{ $favorite_posts }}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-light-green hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">forum</i>
+                    <i class="material-icons">library_books</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW COMMENTS</div>
-                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">PENDING POSTS</div>
+                    <div class="number count-to" data-from="0" data-to="{{ $total_pending_posts }}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -53,49 +53,13 @@
                     <i class="material-icons">person_add</i>
                 </div>
                 <div class="content">
-                    <div class="text">NEW VISITORS</div>
-                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="text">TOTAL VIEWS</div>
+                    <div class="number count-to" data-from="0" data-to="{{ $all_views }}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
     </div>
     <!-- #END# Widgets -->
-    <!-- CPU Usage -->
-    <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="card">
-                <div class="header">
-                    <div class="row clearfix">
-                        <div class="col-xs-12 col-sm-6">
-                            <h2>CPU USAGE (%)</h2>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 align-right">
-                            <div class="switch panel-switch-btn">
-                                <span class="m-r-10 font-12">REAL TIME</span>
-                                <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="body">
-                    <div id="real_time_chart" class="dashboard-flot-chart"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- #END# CPU Usage -->
     <div class="row clearfix">
         <!-- Visitors -->
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -105,20 +69,22 @@
                          data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
                          data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
                          data-fill-Color="rgba(0, 188, 212, 0)">
-                        12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
+                        @foreach ($posts_summary_date['top_10_days_post_count'] as $item)
+                            {{ $item . ',' }}
+                        @endforeach
                     </div>
                     <ul class="dashboard-stat-list">
                         <li>
                             TODAY
-                            <span class="pull-right"><b>1 200</b> <small>USERS</small></span>
+                            <span class="pull-right"><b>{{ $posts_summary_date['posts_today'] }}</b> <small>POSTS</small></span>
                         </li>
                         <li>
                             YESTERDAY
-                            <span class="pull-right"><b>3 872</b> <small>USERS</small></span>
+                            <span class="pull-right"><b>{{ $posts_summary_date['posts_yesterday'] }}</b> <small>POSTS</small></span>
                         </li>
                         <li>
                             LAST WEEK
-                            <span class="pull-right"><b>26 582</b> <small>USERS</small></span>
+                            <span class="pull-right"><b>{{ $posts_summary_date['post_last_week'] }}</b> <small>POSTS</small></span>
                         </li>
                     </ul>
                 </div>
@@ -131,27 +97,11 @@
                 <div class="body bg-cyan">
                     <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
                     <ul class="dashboard-stat-list">
+                        @foreach ($trending_category as $category)
                         <li>
-                            #socialtrends
-                            <span class="pull-right">
-                                <i class="material-icons">trending_up</i>
-                            </span>
+                            <a style="color: white;" href="{{ route('category.posts', $category->slug) }}"># {{ $category->slug }}</a>
                         </li>
-                        <li>
-                            #materialdesign
-                            <span class="pull-right">
-                                <i class="material-icons">trending_up</i>
-                            </span>
-                        </li>
-                        <li>#adminbsb</li>
-                        <li>#freeadmintemplate</li>
-                        <li>#bootstraptemplate</li>
-                        <li>
-                            #freehtmltemplate
-                            <span class="pull-right">
-                                <i class="material-icons">trending_up</i>
-                            </span>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -161,31 +111,31 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="card">
                 <div class="body bg-teal">
-                    <div class="font-bold m-b--35">ANSWERED TICKETS</div>
+                    <div class="font-bold m-b--35">VIEW HISTORY</div>
                     <ul class="dashboard-stat-list">
                         <li>
                             TODAY
-                            <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
+                            <span class="pull-right"><b>{{ $views_summary_date['today'] }}</b> <small>VIEWS</small></span>
                         </li>
                         <li>
                             YESTERDAY
-                            <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
+                            <span class="pull-right"><b>{{ $views_summary_date['yesterday'] }}</b> <small>VIEWS</small></span>
                         </li>
                         <li>
                             LAST WEEK
-                            <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
+                            <span class="pull-right"><b>{{ $views_summary_date['last_week'] }}</b> <small>VIEWS</small></span>
                         </li>
                         <li>
                             LAST MONTH
-                            <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
+                            <span class="pull-right"><b>{{ $views_summary_date['last_month'] }}</b> <small>VIEWS</small></span>
                         </li>
                         <li>
                             LAST YEAR
-                            <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
+                            <span class="pull-right"><b>{{ $views_summary_date['last_year'] }}</b> <small>VIEWS</small></span>
                         </li>
                         <li>
                             ALL
-                            <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
+                            <span class="pull-right"><b>{{ $views_summary_date['all'] }}</b> <small>VIEWS</small></span>
                         </li>
                     </ul>
                 </div>
@@ -199,30 +149,19 @@
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <div class="card">
                 <div class="header">
-                    <h2>TASK INFOS</h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <h2>TRENDING POSTS</h2>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Task</th>
+                                    <th>Rank List</th>
+                                    <th>Title</th>
+                                    <th>Views</th>
+                                    <th>Commnents</th>
+                                    <th>Favorites</th>
                                     <th>Status</th>
-                                    <th>Manager</th>
-                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -319,5 +258,26 @@
 @endsection
 
 @push('js')
-    
+<!-- Jquery CountTo Plugin Js -->
+<script src="{{ asset('backend/plugins/jquery-countto/jquery.countTo.js') }}"></script>
+
+<!-- Morris Plugin Js -->
+<script src="{{ asset('backend/plugins/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('backend/plugins/morrisjs/morris.js') }}"></script>
+
+<!-- ChartJs -->
+<script src="{{ asset('backend/plugins/chartjs/Chart.bundle.js') }}"></script>
+
+<!-- Flot Charts Plugin Js -->
+<script src="{{ asset('backend/plugins/flot-charts/jquery.flot.js') }}"></script>
+<script src="{{ asset('backend/plugins/flot-charts/jquery.flot.resize.js') }}"></script>
+<script src="{{ asset('backend/plugins/flot-charts/jquery.flot.pie.js') }}"></script>
+<script src="{{ asset('backend/plugins/flot-charts/jquery.flot.categories.js') }}"></script>
+<script src="{{ asset('backend/plugins/flot-charts/jquery.flot.time.js') }}"></script>
+
+<!-- Sparkline Chart Plugin Js -->
+<script src="{{ asset('backend/plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
+
+<!-- custom js -->
+<script src="{{ asset('backend/js/pages/index.js') }}"></script>  
 @endpush

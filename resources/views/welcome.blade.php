@@ -123,7 +123,7 @@
                                     </a>
                                 </h4>
     
-                                <p>{!! $posts[3]->body !!}</p>
+                                <p>{!! Str::limit($posts[3]->body, '150') !!}</p>
     
                                 <div class="avatar-area">
                                     <a class="avatar" href="{{ route('author.profile', $posts[3]->user->username) }}">
@@ -240,7 +240,7 @@
                                     </a>
                                 </h4>
     
-                                <p>{!! $posts[5]->body !!}</p>
+                                <p>{!! Str::limit($posts[5]->body, '150') !!}</p>
     
                                 <div class="avatar-area">
                                     <a class="avatar" href="{{ route('author.profile', $posts[5]->user->username) }}">
@@ -460,7 +460,7 @@
                                     </a>
                                 </h4>
     
-                                <p>{!! $posts[11]->body !!}</p>
+                                <p>{!! Str::limit($posts[11]->body, '150') !!}</p>
     
                                 <div class="avatar-area">
                                     <a class="avatar" href="{{ route('author.profile', $posts[11]->user->username) }}">
