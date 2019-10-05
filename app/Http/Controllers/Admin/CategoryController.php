@@ -137,6 +137,14 @@ class CategoryController extends Controller
             'height' => 479
         ]);
 
+        // upload in the categories/slider directory
+        Utils::createDirectory('categories/sliders');
+        // resize image for category slider and upload
+        $sliderImage = Image::make($image)->fit(500, 333)->stream();
+        Storage::disk('public')->put('categories/sliders/'.$imageName, $sliderImage);
+        // delete the old image
+        Utils::deleteImage('categories/sliders/'.$category->image);
+
         $category->name = $request->name;
         $category->slug = $slug;
         $category->image = $imageName;
