@@ -23,6 +23,8 @@ class DashboardController extends Controller
         $user = Auth::user();
         $posts = $user->posts;
 
+        $posts_count = $posts->count();
+
         $popular_posts = $user->posts()
                 ->withCount('comments')
                 ->withCount('favorite_to_users')
@@ -92,7 +94,7 @@ class DashboardController extends Controller
         ];
 
         return view('author.dashboard', compact(
-            'posts',
+            'posts_count',
             'popular_posts',
             'total_pending_posts',
             'all_views',

@@ -21,7 +21,7 @@
                 </div>
                 <div class="content">
                     <div class="text">TOTAL POSTS</div>
-                    <div class="number count-to" data-from="0" data-to="{{ $posts->count() }}" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="{{ $posts_count }}" data-speed="15" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
