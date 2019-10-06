@@ -111,6 +111,54 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="header">
+                        <h2>ACTIVE USERS</h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover dashboard-task-infos">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Info</th>
+                                        <th>Posts</th>
+                                        <th>Views</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($active_authors as $key=>$author)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a class="avatar" href="{{ route('author.profile', $author->username) }}">
+                                                        <img class="media-object" src="{{ asset('/storage/profiles/'. $author->image) }}" 
+                                                        alt="{{ $author->name }}" width="64" height="64">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">{{ $author->name }}
+                                                    <small>{{ \Carbon\Carbon::parse($author->created_at)->diffForHumans() }}</small></h4>
+                                                    <p>{{ Str::limit($author->about, 200) }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ $author->posts->count() }}</td>
+                                        <td>{{ $author->posts->sum('view_count') }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Task Info -->
+
+            <!-- Task Info -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
                         <h2>TRENDING POSTS</h2>
                     </div>
                     <div class="body">

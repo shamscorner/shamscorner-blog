@@ -26,6 +26,7 @@ class CommentController extends Controller
             ->select(
                 'comments.id',
                 'users.name',
+                'users.username',
                 'users.image AS profile',
                 'comments.created_at AS comment_date',
                 'comments.comment',
@@ -35,6 +36,7 @@ class CommentController extends Controller
                 'posts.created_at AS post_date'
             )
             ->where('users.id', Auth::user()->id)
+            ->orderBy('comments.id', 'desc')
             ->get();
 
         return view('author.comments', compact('data'));

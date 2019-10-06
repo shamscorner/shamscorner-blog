@@ -45,7 +45,7 @@ rel="stylesheet">
                                     <td>
                                         <div class="media">
                                             <div class="media-left">
-                                                <a class="avatar" href="#">
+                                                <a class="avatar" href="{{ route('author.profile', $item->username) }}">
                                                     <img class="media-object" src="{{ asset('/storage/profiles/'. $item->profile) }}" 
                                                     alt="{{ $item->name }}" width="64" height="64">
                                                 </a>

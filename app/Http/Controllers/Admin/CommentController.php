@@ -25,6 +25,7 @@ class CommentController extends Controller
             ->select(
                 'comments.id',
                 'users.name',
+                'users.username',
                 'users.image AS profile',
                 'comments.created_at AS comment_date',
                 'comments.comment',
