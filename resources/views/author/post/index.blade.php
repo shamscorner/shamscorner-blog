@@ -74,7 +74,7 @@ rel="stylesheet">
                                         </td>
                                         <td>
                                             @if($post->status)
-                                                <span class="badge bg-blue">Published</span>
+                                                <span class="badge bg-green">Published</span>
                                             @else
                                                 <span class="badge bg-pink">Pending</span>
                                             @endif
