@@ -13,6 +13,7 @@ use App\Tag;
 use App\User;
 use App\Utils\Utils;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
@@ -25,7 +26,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Auth::User()->posts()->latest()->get();
+        //$posts = Auth::User()->posts()->latest()->get();
+
+        $posts = DB::table('posts')
+            ->join('users', function ($join) {
+                $join->on('posts.user_id', '=', 'users.id')
+                     ->where('users.id', Auth::id());
+            })
+            ->select('posts.*', 'users.name')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('author.post.index', compact('posts'));
     }

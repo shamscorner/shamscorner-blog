@@ -56,9 +56,9 @@
                                 alt="{{ $posts[$i]->title }}">
                             </div>
     
-                            <a class="avatar" href="{{ route('author.profile', $posts[$i]->user->username) }}">
-                                <img src="{{ asset('storage/profiles/'. $posts[$i]->user->image) }}" 
-                                alt="{{ $posts[$i]->user->name }}">
+                            <a class="avatar" href="{{ route('author.profile', $posts[$i]->username) }}">
+                                <img src="{{ asset('storage/profiles/'. $posts[$i]->profile) }}" 
+                                alt="{{ $posts[$i]->name }}">
                             </a>
     
                             <div class="blog-info">
@@ -74,15 +74,15 @@
                                         @guest
                                         <a href="javascript:void(0);" onclick="showToast()">
                                             <i class="ion-heart"></i>
-                                            {{ $posts[$i]->favorite_to_users->count() }}
+                                            {{ $posts[$i]->count_favorite_post }}
                                         </a>
                                         @else 
                                         <a href="javascript:void(0);" 
                                             onclick="submitForm('favorite-form-{{ $posts[$i]->id }}')">
                                             <i 
-                                            class="ion-heart {{ $posts[$i]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            class="ion-heart {{ $favorite_posts->contains([$posts[$i]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                             ></i>
-                                            {{ $posts[$i]->favorite_to_users->count() }}
+                                            {{ $posts[$i]->count_favorite_post }}
                                         </a>
                                         <form id="favorite-form-{{ $posts[$i]->id }}" 
                                             method="POST" 
@@ -93,7 +93,7 @@
                                         @endguest
                                     </li>
                                     <li><a href="javascript:void(0);">
-                                        <i class="ion-chatbubble"></i>{{ $posts[$i]->comments->count() }}</a>
+                                        <i class="ion-chatbubble"></i>{{ $posts[$i]->count_comments }}</a>
                                     </li>
                                     <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                                 </ul>
@@ -126,12 +126,12 @@
                                 <p>{!! Str::limit($posts[3]->body, '150') !!}</p>
     
                                 <div class="avatar-area">
-                                    <a class="avatar" href="{{ route('author.profile', $posts[3]->user->username) }}">
-                                        <img src="{{ asset('storage/profiles/'. $posts[3]->user->image) }}" 
-                                        alt="{{ $posts[3]->user->name }}">
+                                    <a class="avatar" href="{{ route('author.profile', $posts[3]->username) }}">
+                                        <img src="{{ asset('storage/profiles/'. $posts[3]->profile) }}" 
+                                        alt="{{ $posts[3]->name }}">
                                     </a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{ $posts[3]->user->name }}</b></a>
+                                        <a class="name" href="#"><b>{{ $posts[3]->name }}</b></a>
                                         <h6 class="date" href="#">{{ $posts[3]->updated_at }}</h6>
                                     </div>
                                 </div>
@@ -141,15 +141,15 @@
                                         @guest
                                         <a href="javascript:void(0);" onclick="showToast()">
                                             <i class="ion-heart"></i>
-                                            {{ $posts[3]->favorite_to_users->count() }}
+                                            {{ $posts[3]->count_favorite_post }}
                                         </a>
                                         @else 
                                         <a href="javascript:void(0);" 
                                             onclick="submitForm('favorite-form-{{ $posts[3]->id }}')">
                                             <i 
-                                            class="ion-heart {{ $posts[3]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            class="ion-heart {{ $favorite_posts->contains([$posts[3]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                             ></i>
-                                            {{ $posts[3]->favorite_to_users->count() }}
+                                            {{ $posts[3]->count_favorite_post }}
                                         </a>
                                         <form id="favorite-form-{{ $posts[3]->id }}" 
                                             method="POST" 
@@ -160,7 +160,7 @@
                                         @endguest
                                     </li>
                                     <li><a href="javascript:void(0);">
-                                        <i class="ion-chatbubble"></i>{{ $posts[3]->comments->count() }}</a>
+                                        <i class="ion-chatbubble"></i>{{ $posts[3]->count_comments }}</a>
                                     </li>
                                     <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[3]->view_count }}</a></li>
                                 </ul>
@@ -181,9 +181,9 @@
                                     alt="{{ $posts[4]->title }}">
                             </div>
     
-                            <a class="avatar" href="{{ route('author.profile', $posts[4]->user->username) }}">
-                                <img src="{{ asset('storage/profiles/'. $posts[4]->user->image) }}" 
-                                alt="{{ $posts[4]->user->name }}">
+                            <a class="avatar" href="{{ route('author.profile', $posts[4]->username) }}">
+                                <img src="{{ asset('storage/profiles/'. $posts[4]->profile) }}" 
+                                alt="{{ $posts[4]->name }}">
                             </a>
     
                             <h4 class="title">
@@ -197,15 +197,15 @@
                                     @guest
                                     <a href="javascript:void(0);" onclick="showToast()">
                                         <i class="ion-heart"></i>
-                                        {{ $posts[4]->favorite_to_users->count() }}
+                                        {{ $posts[4]->count_favorite_post }}
                                     </a>
                                     @else 
                                     <a href="javascript:void(0);" 
                                         onclick="submitForm('favorite-form-{{ $posts[4]->id }}')">
                                         <i 
-                                        class="ion-heart {{ $posts[4]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        class="ion-heart {{ $favorite_posts->contains([$posts[4]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                         ></i>
-                                        {{ $posts[4]->favorite_to_users->count() }}
+                                        {{ $posts[4]->count_favorite_post }}
                                     </a>
                                     <form id="favorite-form-{{ $posts[4]->id }}" 
                                         method="POST" 
@@ -216,7 +216,7 @@
                                     @endguest
                                 </li>
                                 <li><a href="javascript:void(0);">
-                                    <i class="ion-chatbubble"></i>{{ $posts[4]->comments->count() }}</a>
+                                    <i class="ion-chatbubble"></i>{{ $posts[4]->count_comments }}</a>
                                 </li>
                                 <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[4]->view_count }}</a></li>
                             </ul>
@@ -243,12 +243,12 @@
                                 <p>{!! Str::limit($posts[5]->body, '150') !!}</p>
     
                                 <div class="avatar-area">
-                                    <a class="avatar" href="{{ route('author.profile', $posts[5]->user->username) }}">
-                                        <img src="{{ asset('storage/profiles/'. $posts[5]->user->image) }}" 
-                                        alt="{{ $posts[4]->user->name }}">
+                                    <a class="avatar" href="{{ route('author.profile', $posts[5]->username) }}">
+                                        <img src="{{ asset('storage/profiles/'. $posts[5]->profile) }}" 
+                                        alt="{{ $posts[4]->name }}">
                                     </a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{ $posts[5]->user->name }}</b></a>
+                                        <a class="name" href="#"><b>{{ $posts[5]->name }}</b></a>
                                         <h6 class="date" href="#">{{ $posts[5]->updated_at }}</h6>
                                     </div>
                                 </div>
@@ -258,15 +258,15 @@
                                         @guest
                                         <a href="javascript:void(0);" onclick="showToast()">
                                             <i class="ion-heart"></i>
-                                            {{ $posts[5]->favorite_to_users->count() }}
+                                            {{ $posts[5]->count_favorite_post }}
                                         </a>
                                         @else 
                                         <a href="javascript:void(0);" 
                                             onclick="submitForm('favorite-form-{{ $posts[5]->id }}')">
                                             <i 
-                                            class="ion-heart {{ $posts[5]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            class="ion-heart {{ $favorite_posts->contains([$posts[5]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                             ></i>
-                                            {{ $posts[5]->favorite_to_users->count() }}
+                                            {{ $posts[5]->count_favorite_post }}
                                         </a>
                                         <form id="favorite-form-{{ $posts[5]->id }}" 
                                             method="POST" 
@@ -277,7 +277,7 @@
                                         @endguest
                                     </li>
                                     <li><a href="javascript:void(0);">
-                                        <i class="ion-chatbubble"></i>{{ $posts[5]->comments->count() }}</a>
+                                        <i class="ion-chatbubble"></i>{{ $posts[5]->count_comments }}</a>
                                     </li>
                                     <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[5]->view_count }}</a></li>
                                 </ul>
@@ -298,9 +298,9 @@
                                 alt="{{ $posts[6]->title }}">
                             </div>
     
-                            <a class="avatar" href="{{ route('author.profile', $posts[6]->user->username) }}">
-                                <img src="{{ asset('storage/profiles/'. $posts[6]->user->image) }}" 
-                                alt="{{ $posts[6]->user->name }}">
+                            <a class="avatar" href="{{ route('author.profile', $posts[6]->username) }}">
+                                <img src="{{ asset('storage/profiles/'. $posts[6]->profile) }}" 
+                                alt="{{ $posts[6]->name }}">
                             </a>
     
                             <h4 class="title">
@@ -314,15 +314,15 @@
                                     @guest
                                     <a href="javascript:void(0);" onclick="showToast()">
                                         <i class="ion-heart"></i>
-                                        {{ $posts[6]->favorite_to_users->count() }}
+                                        {{ $posts[6]->count_favorite_post }}
                                     </a>
                                     @else 
                                     <a href="javascript:void(0);" 
                                         onclick="submitForm('favorite-form-{{ $posts[6]->id }}')">
                                         <i 
-                                        class="ion-heart {{ $posts[6]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        class="ion-heart {{ $favorite_posts->contains([$posts[6]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                         ></i>
-                                        {{ $posts[6]->favorite_to_users->count() }}
+                                        {{ $posts[6]->count_favorite_post }}
                                     </a>
                                     <form id="favorite-form-{{ $posts[6]->id }}" 
                                         method="POST" 
@@ -333,7 +333,7 @@
                                     @endguest
                                 </li>
                                 <li><a href="javascript:void(0);">
-                                    <i class="ion-chatbubble"></i>{{ $posts[6]->comments->count() }}</a>
+                                    <i class="ion-chatbubble"></i>{{ $posts[6]->count_comments }}</a>
                                 </li>
                                 <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[6]->view_count }}</a></li>
                             </ul>
@@ -362,15 +362,15 @@
                                     @guest
                                     <a href="javascript:void(0);" onclick="showToast()">
                                         <i class="ion-heart"></i>
-                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                        {{ $posts[$i]->count_favorite_post }}
                                     </a>
                                     @else 
                                     <a href="javascript:void(0);" 
                                         onclick="submitForm('favorite-form-{{ $posts[$i]->id }}')">
                                         <i 
-                                        class="ion-heart {{ $posts[$i]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        class="ion-heart {{ $favorite_posts->contains([$posts[$i]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                         ></i>
-                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                        {{ $posts[$i]->count_favorite_post }}
                                     </a>
                                     <form id="favorite-form-{{ $posts[$i]->id }}" 
                                         method="POST" 
@@ -381,7 +381,7 @@
                                     @endguest
                                 </li>
                                 <li><a href="javascript:void(0);">
-                                    <i class="ion-chatbubble"></i>{{ $posts[$i]->comments->count() }}</a>
+                                    <i class="ion-chatbubble"></i>{{ $posts[$i]->count_comments }}</a>
                                 </li>
                                 <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                             </ul>
@@ -411,15 +411,15 @@
                                     @guest
                                     <a href="javascript:void(0);" onclick="showToast()">
                                         <i class="ion-heart"></i>
-                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                        {{ $posts[$i]->count_favorite_post }}
                                     </a>
                                     @else 
                                     <a href="javascript:void(0);" 
                                         onclick="submitForm('favorite-form-{{ $posts[$i]->id }}')">
                                         <i 
-                                        class="ion-heart {{ $posts[$i]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        class="ion-heart {{ $favorite_posts->contains([$posts[$i]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                         ></i>
-                                        {{ $posts[$i]->favorite_to_users->count() }}
+                                        {{ $posts[$i]->count_favorite_post }}
                                     </a>
                                     <form id="favorite-form-{{ $posts[$i]->id }}" 
                                         method="POST" 
@@ -430,7 +430,7 @@
                                     @endguest
                                 </li>
                                 <li><a href="javascript:void(0);">
-                                    <i class="ion-chatbubble"></i>{{ $posts[$i]->comments->count() }}</a>
+                                    <i class="ion-chatbubble"></i>{{ $posts[$i]->count_comments }}</a>
                                 </li>
                                 <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[$i]->view_count }}</a></li>
                             </ul>
@@ -463,12 +463,12 @@
                                 <p>{!! Str::limit($posts[11]->body, '150') !!}</p>
     
                                 <div class="avatar-area">
-                                    <a class="avatar" href="{{ route('author.profile', $posts[11]->user->username) }}">
-                                        <img src="{{ asset('storage/profiles/'. $posts[11]->user->image) }}" 
-                                        alt="{{ $posts[11]->user->name }}">
+                                    <a class="avatar" href="{{ route('author.profile', $posts[11]->username) }}">
+                                        <img src="{{ asset('storage/profiles/'. $posts[11]->profile) }}" 
+                                        alt="{{ $posts[11]->name }}">
                                     </a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{ $posts[11]->user->name }}</b></a>
+                                        <a class="name" href="#"><b>{{ $posts[11]->name }}</b></a>
                                         <h6 class="date" href="#">{{ $posts[11]->updated_at }}</h6>
                                     </div>
                                 </div>
@@ -478,15 +478,15 @@
                                         @guest
                                         <a href="javascript:void(0);" onclick="showToast()">
                                             <i class="ion-heart"></i>
-                                            {{ $posts[11]->favorite_to_users->count() }}
+                                            {{ $posts[11]->count_favorite_post }}
                                         </a>
                                         @else 
                                         <a href="javascript:void(0);" 
                                             onclick="submitForm('favorite-form-{{ $posts[11]->id }}')">
                                             <i 
-                                            class="ion-heart {{ $posts[11]->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                            class="ion-heart {{ $favorite_posts->contains([$posts[11]->id => Auth::user()->id]) ? ' text-danger' : '' }}"
                                             ></i>
-                                            {{ $posts[11]->favorite_to_users->count() }}
+                                            {{ $posts[11]->count_favorite_post }}
                                         </a>
                                         <form id="favorite-form-{{ $posts[11]->id }}" 
                                             method="POST" 
@@ -497,7 +497,7 @@
                                         @endguest
                                     </li>
                                     <li><a href="javascript:void(0);">
-                                        <i class="ion-chatbubble"></i>{{ $posts[11]->comments->count() }}</a>
+                                        <i class="ion-chatbubble"></i>{{ $posts[11]->count_comments }}</a>
                                     </li>
                                     <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $posts[11]->view_count }}</a></li>
                                 </ul>
@@ -520,9 +520,9 @@
                             alt="{{ $post->title }}">
                         </div>
 
-                        <a class="avatar" href="{{ route('author.profile', $post->user->username) }}">
-                            <img src="{{ asset('storage/profiles/'. $post->user->image) }}" 
-                            alt="{{ $post->user->name }}">
+                        <a class="avatar" href="{{ route('author.profile', $post->username) }}">
+                            <img src="{{ asset('storage/profiles/'. $post->profile) }}" 
+                            alt="{{ $post->name }}">
                         </a>
 
                         <div class="blog-info">
@@ -536,12 +536,12 @@
                             <ul class="post-footer">
 
                                 @guest
-                                <li><i class="ion-heart"></i>{{ $post->favorite_to_users->count() }}/li>
-                                <li><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</li>
+                                <li><i class="ion-heart"></i>{{ $post->count_favorite_post }}/li>
+                                <li><i class="ion-chatbubble"></i>{{ $post->count_comments }}</li>
                                 <li><i class="ion-eye"></i>{{ $post->view_count }}</li>
                                 @else
-                                <li><a href="javascript:void(0);"><i class="ion-heart"></i>{{ $post->favorite_to_users->count() }}</a></li>
-                                <li><a href="javascript:void(0);"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
+                                <li><a href="javascript:void(0);"><i class="ion-heart {{ $favorite_posts->contains([$post->id => Auth::user()->id]) ? ' text-danger' : '' }}"></i>{{ $post->count_favorite_post }}</a></li>
+                                <li><a href="javascript:void(0);"><i class="ion-chatbubble"></i>{{ $post->count_comments }}</a></li>
                                 <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                                 @endguest
                                 

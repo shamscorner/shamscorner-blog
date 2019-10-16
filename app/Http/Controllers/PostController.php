@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
@@ -33,7 +35,16 @@ class PostController extends Controller
     */
     public function details($slug)
     {
-        $post = Post::where('slug', $slug)->approved()->published()->first();
+        $post = Post::where('slug', $slug)
+            ->approved()
+            ->published()
+            ->withCount('comments')
+            ->with('user')
+            ->first();
+
+        $comments = $post->comments()->with('user')->get();
+
+        //dd($comments);
 
         $blogKey = 'shamscorner_' . $post->id;
 
@@ -43,9 +54,23 @@ class PostController extends Controller
             Session::put($blogKey);
         }
 
-        $randomPosts = Post::approved()->published()->take(3)->inRandomOrder()->get();
+        $randomPosts = Post::approved()
+            ->published()
+            ->take(3)
+            ->inRandomOrder()
+            ->with('user')
+            ->withCount('favorite_to_users')
+            ->get();
 
-        return view('post', compact('post', 'randomPosts'));
+        $favorite_posts = DB::table('post_user')
+            ->select('post_id', 'user_id')
+            ->groupBy('post_id', 'user_id')
+            ->get()
+            ->map(function ($item) {
+                return [$item->post_id => $item->user_id];
+            });
+
+        return view('post', compact('post', 'randomPosts', 'favorite_posts', 'comments'));
     }
 
     /**

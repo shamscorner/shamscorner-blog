@@ -13,6 +13,7 @@ use App\Utils\Utils;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -37,7 +38,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        //$posts = Post::latest()->get();
+
+        $posts = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->select('posts.*', 'users.name')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('admin.post.index', compact('posts'));
     }
@@ -201,7 +208,16 @@ class PostController extends Controller
     */
     public function pending()
     {
-        $posts = Post::where('is_approved', false)->get();
+        //$posts = Post::where('is_approved', false)->get();
+
+        $posts = DB::table('posts')
+            ->join('users', function ($join) {
+                $join->on('posts.user_id', '=', 'users.id')
+                     ->where('posts.is_approved', 'false');
+            })
+            ->select('posts.*', 'users.name')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('admin.post.pending', compact('posts'));
     }

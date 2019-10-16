@@ -61,15 +61,15 @@
                                 @guest
                                 <a href="javascript:void(0);" onclick="showToast()">
                                     <i class="ion-heart"></i>
-                                    {{ $post->favorite_to_users->count() }}
+                                    {{ $post->favorite_to_users_count }}
                                 </a>
                                 @else 
                                 <a href="javascript:void(0);" 
                                     onclick="submitForm('favorite-form-{{ $post->id }}')">
                                     <i 
-                                    class="ion-heart {{ $post->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                    class="ion-heart {{ $favorite_posts->contains([$post->id => Auth::id()]) ? ' text-danger' : '' }}"
                                     ></i>
-                                    {{ $post->favorite_to_users->count() }}
+                                    {{ $post->favorite_to_users_count }}
                                 </a>
                                 <form id="favorite-form-{{ $post->id }}" 
                                     method="POST" 
@@ -79,7 +79,7 @@
                                 </form>
                                 @endguest
                             </li>
-                            <li><a href="#"><i class="ion-chatbubble"></i>{{ $post->comments->count() }}</a></li>
+                            <li><a href="#"><i class="ion-chatbubble"></i>{{ count($comments) }}</a></li>
                             <li><a href="#"><i class="ion-eye"></i>{{ $post->view_count }}</a></li>
                         </ul>
 
@@ -164,15 +164,15 @@
                                     @guest
                                     <a href="javascript:void(0);" onclick="showToast()">
                                         <i class="ion-heart"></i>
-                                        {{ $randomPost->favorite_to_users->count() }}
+                                        {{ $randomPost->favorite_to_users_count }}
                                     </a>
                                     @else 
                                     <a href="javascript:void(0);" 
                                         onclick="submitForm('favorite-form-{{ $randomPost->id }}')">
                                         <i 
-                                        class="ion-heart {{ $randomPost->favorite_to_users()->where('user_id', Auth::user()->id)->count() ? ' text-danger' : '' }}"
+                                        class="ion-heart {{ $favorite_posts->contains([$randomPost->id => Auth::id()]) ? ' text-danger' : '' }}"
                                         ></i>
-                                        {{ $randomPost->favorite_to_users->count() }}
+                                        {{ $randomPost->favorite_to_users_count }}
                                     </a>
                                     <form id="favorite-form-{{ $randomPost->id }}" 
                                         method="POST" 
@@ -231,12 +231,12 @@
                     @endguest
                 </div><!-- comment-form -->
 
-                <h4><b>COMMENTS({{ $post->comments->count() }})</b></h4>
+                <h4><b>COMMENTS({{ count($comments) }})</b></h4>
 
                 <div class="commnets-area ">
 
-                    @if ($post->comments->count())
-                        @foreach ($post->comments as $comment)
+                    @if (count($comments))
+                        @foreach ($comments as $comment)
                         <div class="comment">
 
                             <div class="post-info">

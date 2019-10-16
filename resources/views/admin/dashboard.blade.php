@@ -122,6 +122,8 @@
                                         <th>Info</th>
                                         <th>Posts</th>
                                         <th>Views</th>
+                                        <th>Comments</th>
+                                        <th>Favorites</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -143,8 +145,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ $author->posts->count() }}</td>
+                                        <td>{{ $author->posts_count }}</td>
                                         <td>{{ $author->posts->sum('view_count') }}</td>
+                                        <td>{{ $author->comments_count }}</td>
+                                        <td>{{ $author->favorite_posts_count }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

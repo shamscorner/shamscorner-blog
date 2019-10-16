@@ -63,7 +63,7 @@ rel="stylesheet">
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ Str::limit($post->title, '15') }}</td>
-                                        <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->name }}</td>
                                         <td>{{ $post->view_count }}</td>
                                         <td>
                                             @if($post->is_approved)

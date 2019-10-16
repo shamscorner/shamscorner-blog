@@ -61,7 +61,7 @@ rel="stylesheet">
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->posts->count() }}</td>
+                                        <td>{{ $category->count_post }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td>

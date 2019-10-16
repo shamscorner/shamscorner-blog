@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Utils\Utils;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -20,8 +21,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->get();
-        
+        //$categories = Category::latest()->get();
+
+        $sub_table = DB::table('category_post')
+            ->select(DB::raw('COUNT(post_id) AS count_post'), 'category_id')
+            ->groupBy('category_id');
+
+        $categories = DB::table('categories')
+            ->joinSub($sub_table, 'group_by_category', function ($join) {
+                $join->on('group_by_category.category_id', '=', 'categories.id');
+            })
+            ->select('*')
+            ->orderByDesc('created_at')
+            ->get();
+
         return view('admin.category.index', compact('categories'));
     }
 

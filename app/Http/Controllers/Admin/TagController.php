@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Tag;
 use Illuminate\Support\Str;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
@@ -17,7 +18,19 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::latest()->get();
+        //$tags = Tag::latest()->get();
+
+        $sub_table = DB::table('post_tag')
+            ->select(DB::raw('COUNT(post_id) AS count_post'), 'tag_id')
+            ->groupBy('tag_id');
+
+        $tags = DB::table('tags')
+            ->joinSub($sub_table, 'group_by_tag', function ($join) {
+                $join->on('group_by_tag.tag_id', '=', 'tags.id');
+            })
+            ->select('*')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('admin.tag.index', compact('tags'));
     }

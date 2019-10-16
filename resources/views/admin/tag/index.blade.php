@@ -61,7 +61,7 @@ rel="stylesheet">
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $tag->name }}</td>
                                         <td>{{ $tag->slug }}</td>
-                                        <td>{{ $tag->posts->count() }}</td>
+                                        <td>{{ $tag->count_post }}</td>
                                         <td>{{ $tag->created_at }}</td>
                                         <td>{{ $tag->updated_at }}</td>
                                         <td>
